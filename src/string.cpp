@@ -200,6 +200,13 @@ queue<string> split(string s)//check the connectors to create substrings
 				}
 			}
 			break;
+		case '#':// set position of iterator to end if string to ignore comments
+			{
+				list.push(s.substr(sPos, i-sPos));
+				i = len;
+				sPos = len;
+			}
+			break;
 		default:;
 		}
 	}
