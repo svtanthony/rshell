@@ -1,0 +1,32 @@
+ls 					# run command
+ls -a 					# run command with a flag
+ls -l -a 				# run multiple flags
+ls -al					# run combined flags
+ls ; echo something 			# run multiple commands
+ls;echo something 			# parse ';' beetween commands
+echo #something				# pound is a comment
+echo \#someting				# pound is printed
+echo "#;&&||"				# special characters ignored
+echo "something"else"			# ask for user input, terminate when quotes is found
+l					# bad command
+ls a					# bad path
+ls -0					# invalid operation
+/bin/ls					# run command "no color on terminal?"
+ls /path				# ls given path
+ls || echo something			# or
+ls && echo something			# and
+ls; echo something && echo something	# command chain to &&
+ls || echo something; echo something	# && chain to command
+ls        -a  				# a lot of white spaces
+ls 			-a		# a lot of tabs
+\n					# returns
+ls ? -a					# random character
+l || ls					# fail or pass
+ls || l					# pass or error
+l && ls					# error & pass
+ls && l					# pass & error
+l;ls					# error ; pass
+ls;l					# pass ; error
+l;l					# error ; error
+l||l					# error or error
+l&&l					# error & error
