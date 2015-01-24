@@ -27,7 +27,7 @@ void itemCount(string s);
 int main()
 {
 	init();
-   	string s,signature = terminalPrefix();
+   	string s,signature = terminalPrefix();// obtain username and hostname
 	bool run = 1;
 	
 	while(run)
@@ -40,7 +40,7 @@ int main()
 	return 0;
 }
 
-string terminalPrefix()
+string terminalPrefix()//function to get username and hostname
 {
 	string signature;
 	char *lgn,host[50];
@@ -73,7 +73,7 @@ int sysCalls()
 			perror(array[0]);
 			exit(1);
 		}
-	}else //parent - wait for child before proceeding---------------------------------------------------------------------------
+	}else //parent - wait for child before proceeding
 		if( waitpid(pid, &status, 0) == -1)
 		{
 			perror("Waiting Error");
@@ -84,8 +84,8 @@ int sysCalls()
 
 void parse(string s, bool &run)
 {
-	queue<string> list;//fuctions creates substrings of commands and separators
-	list = split(s);
+	queue<string> list;
+	list = split(s);//fuction creates substrings of commands and separators
 	int status(0);
 	while(!list.empty())
 	{
@@ -95,7 +95,7 @@ void parse(string s, bool &run)
 		itemCount(list.front());
 		test = list.front();
 		list.pop();
-
+		// check if we have commands or connectors and depending on the connector check the previous exit status
 		if(test == ";")
 			continue;//continue means run the command
 		else if( test.compare("||") == 0)
@@ -125,7 +125,7 @@ void parse(string s, bool &run)
 		}
 		init();
 		int i(0);
-		while(ss >> test)
+		while(ss >> test)// fill the char** normally referred to as args to pass to execvp
 		{
 			strcpy(array[i],test.c_str());
 			i++;
@@ -135,7 +135,7 @@ void parse(string s, bool &run)
 	}
 }
 
-void init()
+void init()// initializes char*[] or char ** array
 {
 	array = new char*[numArgs+1];
 	
@@ -146,21 +146,21 @@ void init()
 	clear();
 }
 
-void clear()
+void clear()// clears the char*
 {
 	for(int i(0); i < numArgs ; i++)
 		for(int j(0); j < numLen ; j++)
 			array[i][j] = '\0';
 }
 
-void nukem()
+void nukem()//deletes the char* and the char**
 {
 	for(int i(numArgs-1); i >= 0 ;i--)
 		delete[] array[i];
 	delete[] array;
 }
 
-queue<string> split(string s)
+queue<string> split(string s)//check the connectors to create substrings
 {
 	queue<string> list;
 	int len = s.size(), sPos(0);
@@ -171,14 +171,14 @@ queue<string> split(string s)
 			next = s[i+1];
 		switch(s[i])
 		{
-		case ';':
+		case ';'://add the substring before the semicolon, then add a semilon to the queue
 			{
 				list.push(s.substr(sPos,i-sPos));
 				list.push(";");
 				sPos = (i+1);
 			}
 			break;
-		case '&':
+		case '&'://add the substring before && to the queue and the connector "&&"" 
 			{
 				if(next == '&')
 				{
@@ -189,7 +189,7 @@ queue<string> split(string s)
 				}
 			}
 			break;
-		case '|':
+		case '|'://add the substring before the || connector to the queue and the "||" connector to the queue
 			{
 				if(next == '|')
 				{
@@ -203,12 +203,12 @@ queue<string> split(string s)
 		default:;
 		}
 	}
-	list.push(s.substr(sPos));
+	list.push(s.substr(sPos));//add the rest of the string to the queue
 	
 	return list;
 }
 
-void itemCount(string s)
+void itemCount(string s)//set glocal variables for array creation
 {
 	stringstream ss;
 	ss << s;
