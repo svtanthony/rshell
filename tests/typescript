@@ -1,398 +1,401 @@
-Script started on Sat 24 Jan 2015 03:48:51 AM PST
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m scr\[K/[K[K[K[Kg++ src/string.cpp 
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m ./a.out [K[K[K[K[K[Ksrc/a.out 
-error obtaining credentials: No such file or directory
- $ l&&l
-l: No such file or directory
- $ l&l
-l&l: No such file or directory
- $ ls  true||  &&ls
-a.out  LICENSE	Makefile  README.md  src  testCases  tests  typescript
- $ ls -l                                             -a												&& echo something
-total 124
-drwxr-xr-x  5 moon moon  4096 Jan 24 03:49 .
-drwxr-xr-x 31 moon moon  4096 Jan 24 03:40 ..
--rwxr-xr-x  1 moon moon 57969 Jan 24 03:49 a.out
-drwxr-xr-x  8 moon moon  4096 Jan 24 03:38 .git
--rw-r--r--  1 moon moon 18027 Jan 24 00:14 LICENSE
--rw-r--r--  1 moon moon   142 Jan 24 02:04 Makefile
--rw-r--r--  1 moon moon  1495 Jan 24 02:41 README.md
-drwxr-xr-x  2 moon moon  4096 Jan 24 03:40 src
--rw-r--r--  1 moon moon  1095 Jan 21 00:50 testCases
--rw-r--r--  1 moon moon 12288 Jan 24 03:37 .testCases.swp
-drwxr-xr-x  2 moon moon  4096 Jan 24 03:38 tests
--rw-r--r--  1 moon moon     0 Jan 24 03:48 typescript
+Script started on Tue 03 Feb 2015 06:57:56 AM PST
+~
+rpasi001@hammer $ ls
+[0m[01;34mlabs[0m/  [01;34mrshell[0m/  string.cpp  token.cpp  [01;34mucr-cs100[0m/  [01;34mWINDOWS[0m/
+[m~
+rpasi001@hammer $ cd rshell/
+~/rshell
+rpasi001@hammer $ ls
+[0m[01;34mbin[0m/  LICENSE  Makefile  README.md  [01;34msrc[0m/  testCases  [01;32mtester[0m*  [01;34mtests[0m/  typescript
+[m~/rshell
+rpasi001@hammer $ bin/rshell 
+rpasi001@hammer.cs.ucr.edu $ echo so  something # exit
 something
- $ tre ue||echo somethng  ing
- $ false||echo something
+rpasi001@hammer.cs.ucr.edu $ echo something || exit
 something
- $ true&& echo soe mething
+rpasi001@hammer.cs.ucr.edu $ echo something && ech  o something # else
 something
- $ false && echo someti hing
- $ l;l
-l: No such file or directory
-l: No such file or directory
- $ ;||l
-l: No such file or directory
- $ l||l
-l: No such file or directory
-l: No such file or directory
- $ l&&l
-l: No such file or directory
- $ ls &&
-a.out  LICENSE	Makefile  README.md  src  testCases  tests  typescript
- $ ls && ||
-a.out  LICENSE	Makefile  README.md  src  testCases  tests  typescript
- $ ls && || ; echo something
-a.out  LICENSE	Makefile  README.md  src  testCases  tests  typescript
 something
- $ ls -0
+rpasi001@hammer.cs.ucr.edu $ #echo something
+rpasi001@hammer.cs.ucr.edu $ 
+rpasi001@hammer.cs.ucr.edu $ 
+rpasi001@hammer.cs.ucr.edu $ 
+rpasi001@hammer.cs.ucr.edu $ 
+rpasi001@hammer.cs.ucr.edu $ 
+rpasi001@hammer.cs.ucr.edu $ 
+rpasi001@hammer.cs.ucr.edu $ 
+rpasi001@hammer.cs.ucr.edu $ 
+rpasi001@hammer.cs.ucr.edu $ 
+rpasi001@hammer.cs.ucr.edu $ 	
+rpasi001@hammer.cs.ucr.edu $           
+rpasi001@hammer.cs.ucr.edu $ echo tur  rue && echo true || echo false && echo true ; echo false # echo more stuff
+true
+true
+true
+false
+rpasi001@hammer.cs.ucr.edu $ exit        exit
+~/rshell
+rpasi001@hammer $ bin/rshell 
+rpasi001@hammer.cs.ucr.edu $ exit -with os  some         thFAL  LAGS
+~/rshell
+rpasi001@hammer $ bin/rshell 
+rpasi001@hammer.cs.ucr.edu $ echo somethn ing ; exit    		exit -al
+something
+~/rshell
+rpasi001@hammer $ bin/rshell 
+rpasi001@hammer.cs.ucr.edu $ echo someting   hing ||  exit && echo someh thing else && exit
+something
+something else
+~/rshell
+rpasi001@hammer $ e[Kthe rest of the cases will be done through a script called tested[Kr[4he[4l[4hc[4l[4hh[4l[4ho[4l[4h [4l[4h*[4l[4h*[4l[4h*[4l[4h*[4l[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C****
+****the rest of the cases will be done through a script called tester
+~/rshell
+rpasi001@hammer $ ls
+[0m[01;34mbin[0m/  LICENSE  Makefile  README.md  [01;34msrc[0m/  testCases  [01;32mtester[0m*  [01;34mtests[0m/  typescript
+[m~/rshell
+rpasi001@hammer $ ./test[K[K[K[K[K[Kcat tester 
+#!/bin/bash
+a=";exit"
+b="echo ;"
+while read in
+do
+    echo "******************************************************************************"
+    echo $in
+    c=$b$in$a
+    echo $c | bin/rshell
+done < <(cat testCases)
+~                                       
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ cat testCases 
+ls 
+ls -a  
+ls -l -a  
+ls -al    
+ls ; echo something 
+ls;echo something 
+echo something  
+echo someting
+echo ";&&||"
+echo "something"else""
+l    
+ls a    
+ls -0    
+/bin/ls 
+ls /path
+ls || echo something    
+ls && echo somethin 
+ls; echo something && echo something
+ls || echo something; echo something
+ls        -a    
+ls          -a    
+\n    
+ls ? -a  
+l || ls  
+ls || l 
+l && ls  
+ls && l 
+l;ls
+ls;l
+l;l 
+l||l
+l&&l
+ls -aaaaaaaaaaaaaaaaaaa -llllllllllllllllllllllllllllllllllllllllllllllllllll -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ls -a -a -a -a -a -a -a -a -a -a -a -a -a -a -a -a -a -l
+ls -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+echo something else
+            ls -l           -a          -a                                  -h 
+echo something || ls -l && echo success && echo suceess2
+echo something ;;;;;;;;;;;;;; echo test || echo pass && ech0 || echo last line to print
+echo something | something & something && echo something else
+echo some || || || || echo 2 
+echo 1 && && && && && && && && && && && echo 2
+echo 1 &&&&&&&&&&&& echo2
+echo 1 ;;;||||&&&& echo 3
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ 
+~/rshell
+rpasi001@hammer $ ./tester 
+******************************************************************************
+ls
+rpasi001@hammer.cs.ucr.edu $ 
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+******************************************************************************
+ls -a
+rpasi001@hammer.cs.ucr.edu $ 
+.  ..  bin  .git  LICENSE  Makefile  README.md	src  testCases	tester	tests  typescript
+******************************************************************************
+ls -l -a
+rpasi001@hammer.cs.ucr.edu $ 
+total 60
+drwx------  6 rpasi001 csmajs  4096 Feb  3 06:54 .
+drwx------ 12 rpasi001 csmajs  4096 Feb  3 06:53 ..
+drwx------  2 rpasi001 csmajs  4096 Feb  3 06:38 bin
+drwx------  8 rpasi001 csmajs  4096 Feb  3 06:05 .git
+-rw-------  1 rpasi001 csmajs 18027 Feb  3 05:41 LICENSE
+-rw-------  1 rpasi001 csmajs   142 Feb  3 05:41 Makefile
+-rw-------  1 rpasi001 csmajs  1495 Feb  3 05:41 README.md
+drwx------  2 rpasi001 csmajs  4096 Feb  3 05:48 src
+-rw-------  1 rpasi001 csmajs  1191 Feb  3 06:47 testCases
+-rwxr-xr-x  1 rpasi001 csmajs   257 Feb  3 06:53 tester
+drwx------  2 rpasi001 csmajs  4096 Feb  3 05:41 tests
+-rw-------  1 rpasi001 csmajs     0 Feb  3 06:54 typescript
+******************************************************************************
+ls -al
+rpasi001@hammer.cs.ucr.edu $ 
+total 60
+drwx------  6 rpasi001 csmajs  4096 Feb  3 06:54 .
+drwx------ 12 rpasi001 csmajs  4096 Feb  3 06:53 ..
+drwx------  2 rpasi001 csmajs  4096 Feb  3 06:38 bin
+drwx------  8 rpasi001 csmajs  4096 Feb  3 06:05 .git
+-rw-------  1 rpasi001 csmajs 18027 Feb  3 05:41 LICENSE
+-rw-------  1 rpasi001 csmajs   142 Feb  3 05:41 Makefile
+-rw-------  1 rpasi001 csmajs  1495 Feb  3 05:41 README.md
+drwx------  2 rpasi001 csmajs  4096 Feb  3 05:48 src
+-rw-------  1 rpasi001 csmajs  1191 Feb  3 06:47 testCases
+-rwxr-xr-x  1 rpasi001 csmajs   257 Feb  3 06:53 tester
+drwx------  2 rpasi001 csmajs  4096 Feb  3 05:41 tests
+-rw-------  1 rpasi001 csmajs     0 Feb  3 06:54 typescript
+******************************************************************************
+ls ; echo something
+rpasi001@hammer.cs.ucr.edu $ 
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+something
+******************************************************************************
+ls;echo something
+rpasi001@hammer.cs.ucr.edu $ 
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+something
+******************************************************************************
+echo something
+rpasi001@hammer.cs.ucr.edu $ 
+something
+******************************************************************************
+echo someting
+rpasi001@hammer.cs.ucr.edu $ 
+someting
+******************************************************************************
+echo ";&&||"
+rpasi001@hammer.cs.ucr.edu $ 
+"
+": No such file or directory
+******************************************************************************
+echo "something"else""
+rpasi001@hammer.cs.ucr.edu $ 
+"something"else""
+******************************************************************************
+l
+rpasi001@hammer.cs.ucr.edu $ 
+l: No such file or directory
+******************************************************************************
+ls a
+rpasi001@hammer.cs.ucr.edu $ 
+ls: cannot access a: No such file or directory
+******************************************************************************
+ls -0
+rpasi001@hammer.cs.ucr.edu $ 
 ls: invalid option -- '0'
-Try 'ls --help' for more information.
- $ pwd | ls
-pwd: ignoring non-option arguments
-/home/moon/rshell
- $ pwd ||  ; ls
-/home/moon/rshell
-a.out  LICENSE	Makefile  README.md  src  testCases  tests  typescript
- $ exit
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m ls
-[0m[01;32ma.out[0m  LICENSE  Makefile  README.md  [01;34msrc[0m  testCases  [01;34mtests[0m  typescript
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m cat typescript 
-Script started on Sat 24 Jan 2015 03:38:48 AM PST
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m g++ src/string.cpp && src/a.out 
-error obtaining credentials: No such file or directory
- $ exit
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m cd src/
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell/src $[00m ./s[Ka.out 
-error obtaining credentials: No such file or directory
- $ ls
-a.out  string.cpp
- $ ls -l a
-.  ..  a.out  string.cpp
- $ ls -al  -l
-total 76
-drwxr-xr-x 2 moon moon  4096 Jan 24 03:40 .
-drwxr-xr-x 5 moon moon  4096 Jan 24 03:39 ..
--rwxr-xr-x 1 moon moon 57969 Jan 24 02:45 a.out
--rw-r--r-- 1 moon moon  4348 Jan 24 03:05 string.cpp
- $ ls -al
-total 76
-drwxr-xr-x 2 moon moon  4096 Jan 24 03:40 .
-drwxr-xr-x 5 moon moon  4096 Jan 24 03:39 ..
--rwxr-xr-x 1 moon moon 57969 Jan 24 02:45 a.out
--rw-r--r-- 1 moon moon  4348 Jan 24 03:05 string.cpp
- $ tur  rue ||echo   something
- $ trye  ue || ech       ||echo something
- $ ^[[A^[[D^[[D^[[D^[[D^[[D^[[D^[[D                                false || echo something
-something
- $ false||echo something
-something
- $ true && echo something
-something
- $ ls ? -a
-ls: cannot access ?: No such file or directory
- $ l||l
-l: No such file or directory
-l: No such file or directory
- $ l;ls
-l: No such file or directory
-a.out  string.cpp
- $ l;l;
-l: No such file or directory
-l: No such file or directory
- $ l;l;l; 
-l: No such file or directory
-l: No such file or directory
-l: No such file or directory
- $ echo #ht  this is a test
-#this is a test
- $ /bin/ls		
-a.out  string.cpp
- $ ls                 l -l c                 -q                   q a; echo success
-total 76
-drwxr-xr-x 2 moon moon  4096 Jan 24 03:40 .
-drwxr-xr-x 5 moon moon  4096 Jan 24 03:39 ..
--rwxr-xr-x 1 moon moon 57969 Jan 24 02:45 a.out
--rw-r--r-- 1 moon moon  4348 Jan 24 03:05 string.cpp
-success
- $ ls &&
-a.out  string.cpp
- $ ls && ||
-a.out  string.cpp
- $ ls && || ; #
-a.out  string.cpp
-#: No such file or directory
- $ l&&l
-l: No such file or directory
- $ true&&ls
-a.out  string.cpp
- $ exit
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell/src $[00m ls
-[0m[01;32ma.out[0m  string.cpp
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell/src $[00m cd ..
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m ls
-[0m[01;32ma.out[0m  LICENSE  Makefile  README.md  [01;34msrc[0m  testCases  [01;34mtests[0m  typescript
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m cat typescript 
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m script
-Script started, file is typescript
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m scr\[K/[K[K[K[Kg++ src/string.cpp 
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m ./a.out [K[K[K[K[K[Ksrc/a.out 
-error obtaining credentials: No such file or directory
- $ l&&l
-l: No such file or directory
- $ l&l
-l&l: No such file or directory
- $ ls  true||  &&ls
-a.out  LICENSE	Makefile  README.md  src  testCases  tests  typescript
- $ ls -l                                             -a												&& echo something
-total 124
-drwxr-xr-x  5 moon moon  4096 Jan 24 03:49 .
-drwxr-xr-x 31 moon moon  4096 Jan 24 03:40 ..
--rwxr-xr-x  1 moon moon 57969 Jan 24 03:49 a.out
-drwxr-xr-x  8 moon moon  4096 Jan 24 03:38 .git
--rw-r--r--  1 moon moon 18027 Jan 24 00:14 LICENSE
--rw-r--r--  1 moon moon   142 Jan 24 02:04 Makefile
--rw-r--r--  1 moon moon  1495 Jan 24 02:41 README.md
-drwxr-xr-x  2 moon moon  4096 Jan 24 03:40 src
--rw-r--r--  1 moon moon  1095 Jan 21 00:50 testCases
--rw-r--r--  1 moon moon 12288 Jan 24 03:37 .testCases.swp
-drwxr-xr-x  2 moon moon  4096 Jan 24 03:38 tests
--rw-r--r--  1 moon moon     0 Jan 24 03:48 typescript
-something
- $ tre ue||echo somethng  ing
- $ false||echo something
-something
- $ true&& echo soe mething
-something
- $ false && echo someti hing
- $ l;l
-l: No such file or directory
-l: No such file or directory
- $ ;||l
-l: No such file or directory
- $ l||l
-l: No such[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m 
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m 
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m cat typescript ls[K./src/a.out [7@g++ src/string.cpp[Cvim[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[Kssh rpasi001@hammer.cs.ucr.edu[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[10Pgit push origin hw0 tag[Kcommit -m "added tag"tag[Kpush origin hw0 ssh rpasi001@hammer.cs.ucr.edu[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[Kvim src/string.cpp g++[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7P./src/a.out[Cls[Kcat typescript [Kvim typescript 
-[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;40r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[40;1H"typescript" [noeol] 222L, 8192C[>c[1;1H[33m  1 [mScript started on Sat 24 Jan 2015 03:48:51 AM PST
-[33m  2 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m scr[34m^G[m\[34m^G^H^[[m[K/[34m^G^H^[[m[K[34m^H^[[m[K[34m^H^[[m[K[34m^H^[[m[K[34m^G^G[mg++ src/string.cpp [34m^M[m
-[33m  3 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m ./a.out [34m^H^[[m[K[34m^H^[[m[K[34m^H^[[m[K[34m^H^[[m[K[34m^H^[[m[K[34m^H^[[m[Ksrc/a.out [34m^M[m
-[33m  4 [merror obtaining credentials: No such file or directory[34m^M[m
-[33m  5 [m $ l&&l[34m^M[m
-[33m  6 [ml: No such file or directory[34m^M[m
-[33m  7 [m $ l&l[34m^M[m
-[33m  8 [ml&l: No such file or directory[34m^M[m
-[33m  9 [m $ ls[34m^H[m [34m^H^H[m [34m^H[mtrue||[34m^H[m [34m^H^H[m [34m^H[m&&ls[34m^M[m
-[33m 10 [ma.out  LICENSE  Makefile  README.md  src  testCases  tests  typescript[34m^M[m
-[33m 11 [m $ ls -l[45C-a[45C&& echo something[34m^M[m
-[33m 12 [mtotal 124[34m^M[m
-[33m 13 [mdrwxr-xr-x  5 moon moon  4096 Jan 24 03:49 .[34m^M[m
-[33m 14 [mdrwxr-xr-x 31 moon moon  4096 Jan 24 03:40 ..[34m^M[m
-[33m 15 [m-rwxr-xr-x  1 moon moon 57969 Jan 24 03:49 a.out[34m^M[m
-[33m 16 [mdrwxr-xr-x  8 moon moon  4096 Jan 24 03:38 .git[34m^M[m
-[33m 17 [m-rw-r--r--  1 moon moon 18027 Jan 24 00:14 LICENSE[34m^M[m
-[33m 18 [m-rw-r--r--  1 moon moon   142 Jan 24 02:04 Makefile[34m^M[m
-[33m 19 [m-rw-r--r--  1 moon moon  1495 Jan 24 02:41 README.md[34m^M[m
-[33m 20 [mdrwxr-xr-x  2 moon moon  4096 Jan 24 03:40 src[34m^M[m
-[33m 21 [m-rw-r--r--  1 moon moon  1095 Jan 21 00:50 testCases[34m^M[m
-[33m 22 [m-rw-r--r--  1 moon moon 12288 Jan 24 03:37 .testCases.swp[34m^M[m
-[33m 23 [mdrwxr-xr-x  2 moon moon  4096 Jan 24 03:38 tests[34m^M[m
-[33m 24 [m-rw-r--r--  1 moon moon     0 Jan 24 03:48 typescript[34m^M[m
-[33m 25 [msomething[34m^M[m
-[33m 26 [m $ tre[34m^H[m [34m^H[mue||echo somethng[34m^H[m [34m^H^H[m [34m^H[ming[34m^M[m
-[33m 27 [m $ false||echo something[34m^M[m
-[33m 28 [msomething[34m^M[m
-[33m 29 [m $ true&& echo soe[34m^H[m [34m^H[mmething[34m^M[m
-[33m 30 [msomething[34m^M[m
-[33m 31 [m $ false && echo someti[34m^H[m [34m^H[mhing[34m^M[m
-[33m 32 [m $ l;l[34m^M[m
-[33m 33 [ml: No such file or directory[34m^M[m
-[33m 34 [ml: No such file or directory[34m^M[m
-[33m 35 [m $ ;||l[34m^M[m
-[33m 36 [ml: No such file or directory[34m^M[m
-[33m 37 [m $ l||l[34m^M[m
-[33m 38 [ml: No such file or directory[34m^M[m
-[33m 39 [ml: No such file or directory[34m^M[m[40;151H1,1[11CTop[1;5H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[40;151H2[2;5H[?12l[?25h[?25l[40;151H3[3;5H[?12l[?25h[?25l[40;151H4[4;5H[?12l[?25h[?25l[40;151H5[5;5H[?12l[?25h[?25l[40;151H6[6;5H[?12l[?25h[?25l[40;151H7[7;5H[?12l[?25h[?25l[40;151H8[8;5H[?12l[?25h[?25l[40;151H9[9;5H[?12l[?25h[?25l[40;151H10,1[10;5H[?12l[?25h[?25l[40;152H1[11;5H[?12l[?25h[?25l[40;152H2[12;5H[?12l[?25h[?25l[40;152H3[13;5H[?12l[?25h[?25l[40;152H4[14;5H[?12l[?25h[?25l[40;152H5[15;5H[?12l[?25h[?25l[40;152H6[16;5H[?12l[?25h[?25l[40;152H7[17;5H[?12l[?25h[?25l[40;152H8[18;5H[?12l[?25h[?25l[40;152H9[19;5H[?12l[?25h[?25l[40;151H20[20;5H[?12l[?25h[?25l[40;152H1[21;5H[?12l[?25h[?25l[40;152H2[22;5H[?12l[?25h[?25l[40;152H3[23;5H[?12l[?25h[?25l[40;152H4[24;5H[?12l[?25h[?25l[40;152H5[25;5H[?12l[?25h[?25l[40;152H6[26;5H[?12l[?25h[?25l[40;152H7[27;5H[?12l[?25h[?25l[40;152H8[28;5H[?12l[?25h[?25l[40;152H9[29;5H[?12l[?25h[?25l[40;151H30[30;5H[?12l[?25h[?25l[40;152H1[31;5H[?12l[?25h[?25l[40;152H2[32;5H[?12l[?25h[?25l[40;152H3[33;5H[?12l[?25h[?25l[40;152H4[34;5H[?12l[?25h[?25l[40;152H5[35;5H[?12l[?25h[?25l[40;152H6[36;5H[?12l[?25h[?25l[40;152H7[37;5H[?12l[?25h[?25l[40;152H8[38;5H[?12l[?25h[?25l[40;152H9[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 40 [m $ l&&l[34m^M[m[40;1H[K[40;151H40,1[11C0%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 41 [ml: No such file or directory[34m^M[m[40;151H[K[40;151H41,1[11C1%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 42 [m $ ls &&[34m^M[m[40;151H[K[40;151H42,1[11C1%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 43 [ma.out  LICENSE  Makefile  README.md  src  testCases  tests  typescript[34m^M[m[40;151H[K[40;151H43,1[11C2%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 44 [m $ ls && ||[34m^M[m[40;151H[K[40;151H44,1[11C2%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 45 [ma.out  LICENSE  Makefile  README.md  src  testCases  tests  typescript[34m^M[m[40;151H[K[40;151H45,1[11C3%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 46 [m $ ls && || ; echo something[34m^M[m[40;151H[K[40;151H46,1[11C3%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 47 [ma.out  LICENSE  Makefile  README.md  src  testCases  tests  typescript[34m^M[m[40;151H[K[40;151H47,1[11C4%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 48 [msomething[34m^M[m[40;151H[K[40;151H48,1[11C4%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 49 [m $ ls -0[34m^M[m[40;151H[K[40;151H49,1[11C5%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 50 [mls: invalid option -- '0'[34m^M[m[40;151H[K[40;151H50,1[11C6%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 51 [mTry 'ls --help' for more information.[34m^M[m[40;151H[K[40;151H51,1[11C6%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 52 [m $ pwd | ls[34m^M[m[40;151H[K[40;151H52,1[11C7%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 53 [mpwd: ignoring non-option arguments[34m^M[m[40;151H[K[40;151H53,1[11C7%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 54 [m/home/moon/rshell[34m^M[m[40;151H[K[40;151H54,1[11C8%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 55 [m $ pwd ||[34m^H[m [34m^H^H[m [34m^H[m; ls[34m^M[m[40;151H[K[40;151H55,1[11C8%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 56 [m/home/moon/rshell[34m^M[m[40;151H[K[40;151H56,1[11C9%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 57 [ma.out  LICENSE  Makefile  README.md  src  testCases  tests  typescript[34m^M[m[40;151H[K[40;151H57,1[11C9%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 58 [m $ exit[34m^M[m[40;151H[K[40;151H58,1[10C10%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 59 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m ls[34m^M[m[40;151H[K[40;151H59,1[10C10%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 60 [m[34m^[[m[0m[34m^[[m[01;32ma.out[34m^[[m[0m  LICENSE  Makefile  README.md  [34m^[[m[01;34msrc[34m^[[m[0m  testCases  [34m^[[m[01;34mtests[34m^[[m[0m  typescript[34m^M[m[40;151H[K[40;151H60,1[10C11%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 61 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m cat typescript [34m^M[m[40;151H[K[40;151H61,1[10C12%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 62 [mScript started on Sat 24 Jan 2015 03:38:48 AM PST[34m^M[m[40;151H[K[40;151H62,1[10C12%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 63 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m g++ src/string.cpp && src/a.out [34m^M^M[m[40;151H[K[40;151H63,1[10C13%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 64 [merror obtaining credentials: No such file or directory[34m^M^M[m[40;151H[K[40;151H64,1[10C13%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 65 [m $ exit[34m^M^M[m[40;151H[K[40;151H65,1[10C14%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 66 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m cd src/[34m^M^M[m[40;151H[K[40;151H66,1[10C14%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 67 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell/src $[34m^[[m[00m ./s[34m^G^H^[[m[Ka.out [34m^M^M[m[40;151H[K[40;151H67,1[10C15%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 68 [merror obtaining credentials: No such file or directory[34m^M^M[m[40;151H[K[40;151H68,1[10C15%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 69 [m $ ls[34m^M^M[m[40;151H[K[40;151H69,1[10C16%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 70 [ma.out  string.cpp[34m^M^M[m[40;151H[K[40;151H70,1[10C16%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 71 [m $ ls -l[34m^H[m [34m^H[ma[34m^M^M[m[40;151H[K[40;151H71,1[10C17%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 72 [m.  ..  a.out  string.cpp[34m^M^M[m[40;151H[K[40;151H72,1[10C18%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 73 [m $ ls -al[34m^H[m [34m^H[m -l[34m^M^M[m[40;151H[K[40;151H73,1[10C18%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 74 [mtotal 76[34m^M^M[m[40;151H[K[40;151H74,1[10C19%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 75 [mdrwxr-xr-x 2 moon moon  4096 Jan 24 03:40 .[34m^M^M[m[40;151H[K[40;151H75,1[10C19%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 76 [mdrwxr-xr-x 5 moon moon  4096 Jan 24 03:39 ..[34m^M^M[m[40;151H[K[40;151H76,1[10C20%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 77 [m-rwxr-xr-x 1 moon moon 57969 Jan 24 02:45 a.out[34m^M^M[m[40;151H[K[40;151H77,1[10C20%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 78 [m-rw-r--r-- 1 moon moon  4348 Jan 24 03:05 string.cpp[34m^M^M[m[40;151H[K[40;151H78,1[10C21%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 79 [m $ ls -al[34m^M^M[m[40;151H[K[40;151H79,1[10C21%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 80 [mtotal 76[34m^M^M[m[40;151H[K[40;151H80,1[10C22%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 81 [mdrwxr-xr-x 2 moon moon  4096 Jan 24 03:40 .[34m^M^M[m[40;151H[K[40;151H81,1[10C22%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 82 [mdrwxr-xr-x 5 moon moon  4096 Jan 24 03:39 ..[34m^M^M[m[40;151H[K[40;151H82,1[10C23%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 83 [m-rwxr-xr-x 1 moon moon 57969 Jan 24 02:45 a.out[34m^M^M[m[40;151H[K[40;151H83,1[10C24%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 84 [m-rw-r--r-- 1 moon moon  4348 Jan 24 03:05 string.cpp[34m^M^M[m[40;151H[K[40;151H84,1[10C24%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 85 [m $ tur[34m^H[m [34m^H^H[m [34m^H[mrue ||echo [34m^H[m [34m^H[m something[34m^M^M[m[40;151H[K[40;151H85,1[10C25%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 86 [m $ trye[34m^H[m [34m^H^H[m [34m^H[mue || ech[34m^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H[m||echo something[34m^M^M[m[40;151H[K[40;151H86,1[10C25%[39;5H[?12l[?25h[?25l[1;39r[1;1H[2M[1;40r[38;1H[33m 87 [m $ ^[[A^[[D^[[D^[[D^[[D^[[D^[[D^[[D[34m^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^^[m[39;1H[33m    [m[34mH^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H[mfalse || echo something[34m^M^M[m[40;151H[K[40;151H87,1[10C26%[38;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 88 [msomething[34m^M^M[m[40;151H[K[40;151H88,1[10C27%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 89 [m $ false||echo something[34m^M^M[m[40;151H[K[40;151H89,1[10C27%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 90 [msomething[34m^M^M[m[40;151H[K[40;151H90,1[10C28%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 91 [m $ true && echo something[34m^M^M[m[40;151H[K[40;151H91,1[10C28%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 92 [msomething[34m^M^M[m[40;151H[K[40;151H92,1[10C29%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 93 [m $ ls ? -a[34m^M^M[m[40;151H[K[40;151H93,1[10C29%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 94 [mls: cannot access ?: No such file or directory[34m^M^M[m[40;151H[K[40;151H94,1[10C30%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 95 [m $ l||l[34m^M^M[m[40;151H[K[40;151H95,1[10C30%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 96 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H96,1[10C31%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 97 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H97,1[10C32%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 98 [m $ l;ls[34m^M^M[m[40;151H[K[40;151H98,1[10C32%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m 99 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H99,1[10C33%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m100 [ma.out  string.cpp[34m^M^M[m[40;151H[K[40;151H100,1[9C33%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m101 [m $ l;l;[34m^M^M[m[40;151H[K[40;151H101,1[9C34%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m102 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H102,1[9C34%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m103 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H103,1[9C35%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m104 [m $ l;l;l;[34m^H[m [34m^H^M^M[m[40;151H[K[40;151H104,1[9C35%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m105 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H105,1[9C36%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m106 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H106,1[9C36%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m107 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H107,1[9C37%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m108 [m $ echo #ht[34m^H[m [34m^H^H[m [34m^H[mthis is a test[34m^M^M[m[40;151H[K[40;151H108,1[9C38%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m109 [m#this is a test[34m^M^M[m[40;151H[K[40;151H109,1[9C38%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m110 [m $ /bin/ls      [34m^H^H^H^H^H^H^H^H^H^H^H^H^H^H^M^M[m[40;151H[K[40;151H110,1[9C39%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m111 [ma.out  string.cpp[34m^M^M[m[40;151H[K[40;151H111,1[9C39%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m112 [m $ ls[17Cl[34m^H[m [34m^H[m-l c [34m^H[m [34m^H^H[m [34m^H[m      file or directory[34m^M[m[40;151H[K[40;151H112,1[9C40%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m113 [ml: No such file or directory[34m^M[m[40;151H[K[40;151H113,1[9C40%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m114 [m $ l&&l[34m^M[m[40;151H[K[40;151H114,1[9C41%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m115 [ml: No such file or directory[34m^M[m[40;151H[K[40;151H115,1[9C41%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m116 [m $ ls &&[34m^M[m[40;151H[K[40;151H116,1[9C42%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m117 [ma.out  LICENSE  Makefile  README.md  src  testCases  tests  typescript[34m^M[m[40;151H[K[40;151H117,1[9C42%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m118 [m $ ls && ||[34m^M[m[40;151H[K[40;151H118,1[9C43%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m119 [ma.out  LICENSE  Makefile  README.md  src  testCases  tests  typescript[34m^M[m[40;151H[K[40;151H119,1[9C44%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m120 [m $ ls && || ; echo something[34m^M[m[40;151H[K[40;151H120,1[9C44%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m121 [ma.out  LICENSE  Makefile  README.md  src  testCases  tests  typescript[34m^M[m[40;151H[K[40;151H121,1[9C45%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m122 [msomething[34m^M[m[40;151H[K[40;151H122,1[9C45%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m123 [m $ ls -0[34m^M[m[40;151H[K[40;151H123,1[9C46%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m124 [mls: invalid option -- '0'[34m^M[m[40;151H[K[40;151H124,1[9C46%[39;5H[?12l[?25h[?25l[1;39r[1;1H[2M[1;40r[38;1H[33m125 [mTry 'ls --help' for more information.[34m^M[m
-[33m126 [m $ pwd | ls[34m^M[m[40;151H[K[40;151H125,1[9C47%[38;5H[?12l[?25h[?25l[40;153H6[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m127 [mpwd: ignoring non-option arguments[34m^M[m[40;151H[K[40;151H127,1[9C48%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m128 [m/home/moon/rshell[34m^M[m[40;151H[K[40;151H128,1[9C48%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m129 [m $ pwd ||[34m^H[m [34m^H^H[m [34m^H[m; ls[34m^M[m[40;151H[K[40;151H129,1[9C49%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m130 [m/home/moon/rshell[34m^M[m[40;151H[K[40;151H130,1[9C49%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m131 [ma.out  LICENSE  Makefile  README.md  src  testCases  tests  typescript[34m^M[m[40;151H[K[40;151H131,1[9C50%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m132 [m $ exit[34m^M[m[40;151H[K[40;151H132,1[9C50%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m133 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m ls[34m^M[m[40;151H[K[40;151H133,1[9C51%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m134 [m[34m^[[m[0m[34m^[[m[01;32ma.out[34m^[[m[0m  LICENSE  Makefile  README.md  [34m^[[m[01;34msrc[34m^[[m[0m  testCases  [34m^[[m[01;34mtests[34m^[[m[0m  typescript[34m^M[m[40;151H[K[40;151H134,1[9C51%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m135 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m cat typescript [34m^M[m[40;151H[K[40;151H135,1[9C52%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m136 [mScript started on Sat 24 Jan 2015 03:38:48 AM PST[34m^M[m[40;151H[K[40;151H136,1[9C53%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m137 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m g++ src/string.cpp && src/a.out [34m^M^M[m[40;151H[K[40;151H137,1[9C53%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m138 [merror obtaining credentials: No such file or directory[34m^M^M[m[40;151H[K[40;151H138,1[9C54%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m139 [m $ exit[34m^M^M[m[40;151H[K[40;151H139,1[9C54%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m140 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m cd src/[34m^M^M[m[40;151H[K[40;151H140,1[9C55%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m141 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell/src $[34m^[[m[00m ./s[34m^G^H^[[m[Ka.out [34m^M^M[m[40;151H[K[40;151H141,1[9C55%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m142 [merror obtaining credentials: No such file or directory[34m^M^M[m[40;151H[K[40;151H142,1[9C56%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m143 [m $ ls[34m^M^M[m[40;151H[K[40;151H143,1[9C56%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m144 [ma.out  string.cpp[34m^M^M[m[40;151H[K[40;151H144,1[9C57%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m145 [m $ ls -l[34m^H[m [34m^H[ma[34m^M^M[m[40;151H[K[40;151H145,1[9C57%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m146 [m.  ..  a.out  string.cpp[34m^M^M[m[40;151H[K[40;151H146,1[9C58%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m147 [m $ ls -al[34m^H[m [34m^H[m -l[34m^M^M[m[40;151H[K[40;151H147,1[9C59%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m148 [mtotal 76[34m^M^M[m[40;151H[K[40;151H148,1[9C59%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m149 [mdrwxr-xr-x 2 moon moon  4096 Jan 24 03:40 .[34m^M^M[m[40;151H[K[40;151H149,1[9C60%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m150 [mdrwxr-xr-x 5 moon moon  4096 Jan 24 03:39 ..[34m^M^M[m[40;151H[K[40;151H150,1[9C60%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m151 [m-rwxr-xr-x 1 moon moon 57969 Jan 24 02:45 a.out[34m^M^M[m[40;151H[K[40;151H151,1[9C61%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m152 [m-rw-r--r-- 1 moon moon  4348 Jan 24 03:05 string.cpp[34m^M^M[m[40;151H[K[40;151H152,1[9C61%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m153 [m $ ls -al[34m^M^M[m[40;151H[K[40;151H153,1[9C62%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m154 [mtotal 76[34m^M^M[m[40;151H[K[40;151H154,1[9C62%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m155 [mdrwxr-xr-x 2 moon moon  4096 Jan 24 03:40 .[34m^M^M[m[40;151H[K[40;151H155,1[9C63%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m156 [mdrwxr-xr-x 5 moon moon  4096 Jan 24 03:39 ..[34m^M^M[m[40;151H[K[40;151H156,1[9C63%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m157 [m-rwxr-xr-x 1 moon moon 57969 Jan 24 02:45 a.out[34m^M^M[m[40;151H[K[40;151H157,1[9C64%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m158 [m-rw-r--r-- 1 moon moon  4348 Jan 24 03:05 string.cpp[34m^M^M[m[40;151H[K[40;151H158,1[9C65%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m159 [m $ tur[34m^H[m [34m^H^H[m [34m^H[mrue ||echo [34m^H[m [34m^H[m something[34m^M^M[m[40;151H[K[40;151H159,1[9C65%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m160 [m $ trye[34m^H[m [34m^H^H[m [34m^H[mue || ech[34m^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H[m||echo something[34m^M^M[m[40;151H[K[40;151H160,1[9C66%[39;5H[?12l[?25h[?25l[1;39r[1;1H[2M[1;40r[38;1H[33m161 [m $ ^[[A^[[D^[[D^[[D^[[D^[[D^[[D^[[D[34m^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^^[m[39;1H[33m    [m[34mH^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H[mfalse || echo something[34m^M^M[m[40;151H[K[40;151H161,1[9C66%[38;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m162 [msomething[34m^M^M[m[40;151H[K[40;151H162,1[9C67%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m163 [m $ false||echo something[34m^M^M[m[40;151H[K[40;151H163,1[9C67%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m164 [msomething[34m^M^M[m[40;151H[K[40;151H164,1[9C68%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m165 [m $ true && echo something[34m^M^M[m[40;151H[K[40;151H165,1[9C69%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m166 [msomething[34m^M^M[m[40;151H[K[40;151H166,1[9C69%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m167 [m $ ls ? -a[34m^M^M[m[40;151H[K[40;151H167,1[9C70%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m168 [mls: cannot access ?: No such file or directory[34m^M^M[m[40;151H[K[40;151H168,1[9C70%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m169 [m $ l||l[34m^M^M[m[40;151H[K[40;151H169,1[9C71%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m170 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H170,1[9C71%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m171 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H171,1[9C72%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m172 [m $ l;ls[34m^M^M[m[40;151H[K[40;151H172,1[9C72%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m173 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H173,1[9C73%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m174 [ma.out  string.cpp[34m^M^M[m[40;151H[K[40;151H174,1[9C73%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m175 [m $ l;l;[34m^M^M[m[40;151H[K[40;151H175,1[9C74%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m176 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H176,1[9C75%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m177 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H177,1[9C75%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m178 [m $ l;l;l;[34m^H[m [34m^H^M^M[m[40;151H[K[40;151H178,1[9C76%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m179 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H179,1[9C76%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m180 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H180,1[9C77%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m181 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H181,1[9C77%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m182 [m $ echo #ht[34m^H[m [34m^H^H[m [34m^H[mthis is a test[34m^M^M[m[40;151H[K[40;151H182,1[9C78%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m183 [m#this is a test[34m^M^M[m[40;151H[K[40;151H183,1[9C78%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m184 [m $ /bin/ls      [34m^H^H^H^H^H^H^H^H^H^H^H^H^H^H^M^M[m[40;151H[K[40;151H184,1[9C79%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m185 [ma.out  string.cpp[34m^M^M[m[40;151H[K[40;151H185,1[9C79%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m186 [m $ ls[17Cl[34m^H[m [34m^H[m-l c [34m^H[m [34m^H^H[m [34m^H[m[14C-q[9C[34m^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H^H[m [34m^H[mq[34m^H[m [34m^H[ma; echo success[34m^M^M[m[40;151H[K[40;151H186,1[9C80%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m187 [mtotal 76[34m^M^M[m[40;151H[K[40;151H187,1[9C80%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m188 [mdrwxr-xr-x 2 moon moon  4096 Jan 24 03:40 .[34m^M^M[m[40;151H[K[40;151H188,1[9C81%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m189 [mdrwxr-xr-x 5 moon moon  4096 Jan 24 03:39 ..[34m^M^M[m[40;151H[K[40;151H189,1[9C82%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m190 [m-rwxr-xr-x 1 moon moon 57969 Jan 24 02:45 a.out[34m^M^M[m[40;151H[K[40;151H190,1[9C82%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m191 [m-rw-r--r-- 1 moon moon  4348 Jan 24 03:05 string.cpp[34m^M^M[m[40;151H[K[40;151H191,1[9C83%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m192 [msuccess[34m^M^M[m[40;151H[K[40;151H192,1[9C83%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m193 [m $ ls &&[34m^M^M[m[40;151H[K[40;151H193,1[9C84%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m194 [ma.out  string.cpp[34m^M^M[m[40;151H[K[40;151H194,1[9C84%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m195 [m $ ls && ||[34m^M^M[m[40;151H[K[40;151H195,1[9C85%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m196 [ma.out  string.cpp[34m^M^M[m[40;151H[K[40;151H196,1[9C85%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m197 [m $ ls && || ; #[34m^M^M[m[40;151H[K[40;151H197,1[9C86%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m198 [ma.out  string.cpp[34m^M^M[m[40;151H[K[40;151H198,1[9C86%[39;5H[?12l[?25h[?25l[1;39r[1;1H[2M[1;40r[38;1H[33m199 [m#: No such file or directory[34m^M^M[m
-[33m200 [m $ l&&l[34m^M^M[m[40;151H[K[40;151H199,1[9C87%[38;5H[?12l[?25h[?25l[40;151H200[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m201 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H201,1[9C88%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m202 [m $ true&&ls[34m^M^M[m[40;151H[K[40;151H202,1[9C89%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m203 [ma.out  string.cpp[34m^M^M[m[40;151H[K[40;151H203,1[9C89%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m204 [m $ exit[34m^M^M[m[40;151H[K[40;151H204,1[9C90%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m205 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell/src $[34m^[[m[00m ls[34m^M^M[m[40;151H[K[40;151H205,1[9C90%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m206 [m[34m^[[m[0m[34m^[[m[01;32ma.out[34m^[[m[0m  string.cpp[34m^M^M[m[40;151H[K[40;151H206,1[9C91%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m207 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell/src $[34m^[[m[00m cd ..[34m^M^M[m[40;151H[K[40;151H207,1[9C91%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m208 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m ls[34m^M^M[m[40;151H[K[40;151H208,1[9C92%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m209 [m[34m^[[m[0m[34m^[[m[01;32ma.out[34m^[[m[0m  LICENSE  Makefile  README.md  [34m^[[m[01;34msrc[34m^[[m[0m  testCases  [34m^[[m[01;34mtests[34m^[[m[0m  typescript[34m^M^M[m[40;151H[K[40;151H209,1[9C92%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m210 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m cat typescript [34m^M^M[m[40;151H[K[40;151H210,1[9C93%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m211 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m script[34m^M^M[m[40;151H[K[40;151H211,1[9C93%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m212 [mScript started, file is typescript[34m^M^M[m[40;151H[K[40;151H212,1[9C94%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m213 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m scr[34m^G[m\[34m^G^H^[[m[K/[34m^G^H^[[m[K[34m^H^[[m[K[34m^H^[[m[K[34m^H^[[m[K[34m^G^G[mg++ src/string.cpp [34m^M^M[m[40;151H[K[40;151H213,1[9C95%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m214 [m[34m^[[m[01;32mmoon@Tsukuyomi[34m^[[m[01;34m ~/rshell $[34m^[[m[00m ./a.out [34m^H^[[m[K[34m^H^[[m[K[34m^H^[[m[K[34m^H^[[m[K[34m^H^[[m[K[34m^H^[[m[Ksrc/a.out [34m^M^M[m[40;151H[K[40;151H214,1[9C95%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m215 [merror obtaining credentials: No such file or directory[34m^M^M[m[40;151H[K[40;151H215,1[9C96%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m216 [m $ l&&l[34m^M^M[m[40;151H[K[40;151H216,1[9C96%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m217 [ml: No such file or directory[34m^M^M[m[40;151H[K[40;151H217,1[9C97%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m218 [m $ l&l[34m^M^M[m[40;151H[K[40;151H218,1[9C97%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m219 [ml&l: No such file or directory[34m^M^M[m[40;151H[K[40;151H219,1[9C98%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m220 [m $ ls[34m^H[m [34m^H^H[m [34m^H[mtrue||[34m^H[m [34m^H^H[m [34m^H[m&&ls[34m^M^M[m[40;151H[K[40;151H220,1[9C98%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m221 [ma.out  LICENSE  Makefile  README.md  src  testCases  tests  typescript[34m^M^M[m[40;151H[K[40;151H221,1[9C99%[39;5H[?12l[?25h[?25l[1;39r[39;1H
-[1;40r[39;1H[33m222 [m $ ls -l[45C-a[40;151H[K[40;151H222,1[9CBot[39;5H[?12l[?25h[?25l[40;151H[K[40;1H:[?12l[?25hq[?25l[?12l[?25h[?25l[40;1H[K[40;1H[?1l>[?12l[?25h[?1049l[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m ls
-[0m[01;32ma.out[0m  LICENSE  Makefile  README.md  [01;34msrc[0m  testCases  [01;34mtests[0m  typescript
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m mv [K[K[Kmv typescript /tes[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Ktypescript s[Ke[Ktest/[Ks/
-[01;32mmoon@Tsukuyomi[01;34m ~/
+Try `ls --help' for more information.
+******************************************************************************
+/bin/ls
+rpasi001@hammer.cs.ucr.edu $ 
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+******************************************************************************
+ls /path
+rpasi001@hammer.cs.ucr.edu $ 
+ls: cannot access /path: No such file or directory
+******************************************************************************
+ls || echo something
+rpasi001@hammer.cs.ucr.edu $ 
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+******************************************************************************
+ls && echo somethin
+rpasi001@hammer.cs.ucr.edu $ 
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+somethin
+******************************************************************************
+ls; echo something && echo something
+rpasi001@hammer.cs.ucr.edu $ 
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+something
+something
+******************************************************************************
+ls || echo something; echo something
+rpasi001@hammer.cs.ucr.edu $ 
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+something
+******************************************************************************
+ls -a
+rpasi001@hammer.cs.ucr.edu $ 
+.  ..  bin  .git  LICENSE  Makefile  README.md	src  testCases	tester	tests  typescript
+******************************************************************************
+ls -a
+rpasi001@hammer.cs.ucr.edu $ 
+.  ..  bin  .git  LICENSE  Makefile  README.md	src  testCases	tester	tests  typescript
+******************************************************************************
+n
+rpasi001@hammer.cs.ucr.edu $ 
+n: No such file or directory
+******************************************************************************
+ls ? -a
+rpasi001@hammer.cs.ucr.edu $ 
+ls: cannot access ?: No such file or directory
+******************************************************************************
+l || ls
+rpasi001@hammer.cs.ucr.edu $ 
+l: No such file or directory
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+******************************************************************************
+ls || l
+rpasi001@hammer.cs.ucr.edu $ 
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+******************************************************************************
+l && ls
+rpasi001@hammer.cs.ucr.edu $ 
+l: No such file or directory
+******************************************************************************
+ls && l
+rpasi001@hammer.cs.ucr.edu $ 
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+l: No such file or directory
+******************************************************************************
+l;ls
+rpasi001@hammer.cs.ucr.edu $ 
+l: No such file or directory
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+******************************************************************************
+ls;l
+rpasi001@hammer.cs.ucr.edu $ 
+bin  LICENSE  Makefile	README.md  src	testCases  tester  tests  typescript
+l: No such file or directory
+******************************************************************************
+l;l
+rpasi001@hammer.cs.ucr.edu $ 
+l: No such file or directory
+l: No such file or directory
+******************************************************************************
+l||l
+rpasi001@hammer.cs.ucr.edu $ 
+l: No such file or directory
+l: No such file or directory
+******************************************************************************
+l&&l
+rpasi001@hammer.cs.ucr.edu $ 
+l: No such file or directory
+******************************************************************************
+ls -aaaaaaaaaaaaaaaaaaa -llllllllllllllllllllllllllllllllllllllllllllllllllll -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+rpasi001@hammer.cs.ucr.edu $ 
+total 60
+drwx------  6 rpasi001 csmajs  4096 Feb  3 06:54 .
+drwx------ 12 rpasi001 csmajs  4096 Feb  3 06:53 ..
+drwx------  2 rpasi001 csmajs  4096 Feb  3 06:38 bin
+drwx------  8 rpasi001 csmajs  4096 Feb  3 06:05 .git
+-rw-------  1 rpasi001 csmajs 18027 Feb  3 05:41 LICENSE
+-rw-------  1 rpasi001 csmajs   142 Feb  3 05:41 Makefile
+-rw-------  1 rpasi001 csmajs  1495 Feb  3 05:41 README.md
+drwx------  2 rpasi001 csmajs  4096 Feb  3 05:48 src
+-rw-------  1 rpasi001 csmajs  1191 Feb  3 06:47 testCases
+-rwxr-xr-x  1 rpasi001 csmajs   257 Feb  3 06:53 tester
+drwx------  2 rpasi001 csmajs  4096 Feb  3 05:41 tests
+-rw-------  1 rpasi001 csmajs     0 Feb  3 06:54 typescript
+******************************************************************************
+ls -a -a -a -a -a -a -a -a -a -a -a -a -a -a -a -a -a -l
+rpasi001@hammer.cs.ucr.edu $ 
+total 60
+drwx------  6 rpasi001 csmajs  4096 Feb  3 06:54 .
+drwx------ 12 rpasi001 csmajs  4096 Feb  3 06:53 ..
+drwx------  2 rpasi001 csmajs  4096 Feb  3 06:38 bin
+drwx------  8 rpasi001 csmajs  4096 Feb  3 06:05 .git
+-rw-------  1 rpasi001 csmajs 18027 Feb  3 05:41 LICENSE
+-rw-------  1 rpasi001 csmajs   142 Feb  3 05:41 Makefile
+-rw-------  1 rpasi001 csmajs  1495 Feb  3 05:41 README.md
+drwx------  2 rpasi001 csmajs  4096 Feb  3 05:48 src
+-rw-------  1 rpasi001 csmajs  1191 Feb  3 06:47 testCases
+-rwxr-xr-x  1 rpasi001 csmajs   257 Feb  3 06:53 tester
+drwx------  2 rpasi001 csmajs  4096 Feb  3 05:41 tests
+-rw-------  1 rpasi001 csmajs     0 Feb  3 06:54 typescript
+******************************************************************************
+ls -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+rpasi001@hammer.cs.ucr.edu $ 
+.  ..  bin  .git  LICENSE  Makefile  README.md	src  testCases	tester	tests  typescript
+******************************************************************************
+echo something else
+rpasi001@hammer.cs.ucr.edu $ 
+something else
+******************************************************************************
+ls -l -a -a -h
+rpasi001@hammer.cs.ucr.edu $ 
+total 60K
+drwx------  6 rpasi001 csmajs 4.0K Feb  3 06:54 .
+drwx------ 12 rpasi001 csmajs 4.0K Feb  3 06:53 ..
+drwx------  2 rpasi001 csmajs 4.0K Feb  3 06:38 bin
+drwx------  8 rpasi001 csmajs 4.0K Feb  3 06:05 .git
+-rw-------  1 rpasi001 csmajs  18K Feb  3 05:41 LICENSE
+-rw-------  1 rpasi001 csmajs  142 Feb  3 05:41 Makefile
+-rw-------  1 rpasi001 csmajs 1.5K Feb  3 05:41 README.md
+drwx------  2 rpasi001 csmajs 4.0K Feb  3 05:48 src
+-rw-------  1 rpasi001 csmajs 1.2K Feb  3 06:47 testCases
+-rwxr-xr-x  1 rpasi001 csmajs  257 Feb  3 06:53 tester
+drwx------  2 rpasi001 csmajs 4.0K Feb  3 05:41 tests
+-rw-------  1 rpasi001 csmajs    0 Feb  3 06:54 typescript
+******************************************************************************
+echo something || ls -l && echo success && echo suceess2
+rpasi001@hammer.cs.ucr.edu $ 
+something
+success
+suceess2
+******************************************************************************
+echo something ;;;;;;;;;;;;;; echo test || echo pass && ech0 || echo last line to print
+rpasi001@hammer.cs.ucr.edu $ 
+something
+test
+ech0: No such file or directory
+last line to print
+******************************************************************************
+echo something | something & something && echo something else
+rpasi001@hammer.cs.ucr.edu $ 
+something | something & something
+something else
+******************************************************************************
+echo some || || || || echo 2
+rpasi001@hammer.cs.ucr.edu $ 
+some
+******************************************************************************
+echo 1 && && && && && && && && && && && echo 2
+rpasi001@hammer.cs.ucr.edu $ 
+1
+******************************************************************************
+echo 1 &&&&&&&&&&&& echo2
+rpasi001@hammer.cs.ucr.edu $ 
+1
+******************************************************************************
+echo 1 ;;;||||&&&& echo 3
+rpasi001@hammer.cs.ucr.edu $ 
+1
+./tester: line 11: /home/csmajs/rpasi001: is a directory
+~/rshell
+rpasi001@hammer $ exit
+exit
+
+Script done on Tue 03 Feb 2015 07:05:53 AM PST

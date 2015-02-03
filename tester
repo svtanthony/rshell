@@ -1,0 +1,11 @@
+#!/bin/bash
+a=";exit"
+b="echo ;"
+while read in
+do
+    echo "******************************************************************************"
+    echo $in
+    c=$b$in$a
+    echo $c | bin/rshell
+done < <(cat testCases)
+~                                       
