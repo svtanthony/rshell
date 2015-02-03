@@ -26,7 +26,6 @@ void itemCount(string s);
 
 int main()
 {
-	init();
    	string s,signature = terminalPrefix();// obtain username and hostname
 	bool run = 1;
 	
@@ -89,9 +88,10 @@ void parse(string s, bool &run)
 	int status(0);
 	while(!list.empty())
 	{
-		stringstream ss;
+		stringstream ss,ss2;
 		string test;
 		ss << list.front();
+		ss2 << list.front();
 		itemCount(list.front());
 		test = list.front();
 		list.pop();
@@ -118,10 +118,13 @@ void parse(string s, bool &run)
 			else
 				continue;// previous command succeeded (TRUE && command)
 		}
-		else if(test.compare("exit") == 0)
+		else 
 		{
-			run = 0;
-			break;	
+			ss2 >> test;	
+			if(test.compare("exit") == 0){
+				run = 0;
+				break;	
+			}
 		}
 		init();
 		int i(0);
@@ -140,8 +143,7 @@ void init()// initializes char*[] or char ** array
 	array = new char*[numArgs+1];
 	
 	for(int i(0); i < numArgs ; i++)
-		for(int j(0); j < numLen ; j++)
-			array[i] = new char[numLen];
+		array[i] = new char[numLen];
 	array[numArgs] = 0;
 	clear();
 }
@@ -149,7 +151,7 @@ void init()// initializes char*[] or char ** array
 void clear()// clears the char*
 {
 	for(int i(0); i < numArgs ; i++)
-		for(int j(0); j < numLen ; j++)
+		for(int j(0); j < numLen; j++)
 			array[i][j] = '\0';
 }
 
@@ -210,7 +212,8 @@ queue<string> split(string s)//check the connectors to create substrings
 		default:;
 		}
 	}
-	list.push(s.substr(sPos));//add the rest of the string to the queue
+	if (sPos != len)
+		list.push(s.substr(sPos));//add the rest of the string to the queue
 	
 	return list;
 }
