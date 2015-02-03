@@ -1,32 +1,44 @@
-ls 					# run command
-ls -a 					# run command with a flag
-ls -l -a 				# run multiple flags
-ls -al					# run combined flags
-ls ; echo something 			# run multiple commands
-ls;echo something 			# parse ';' beetween commands
-echo #something				# pound is a comment
-echo \#someting				# pound is printed
-echo "#;&&||"				# special characters ignored
-echo "something"else"			# ask for user input, terminate when quotes is found
-l					# bad command
-ls a					# bad path
-ls -0					# invalid operation
-/bin/ls					# run command "no color on terminal?"
-ls /path				# ls given path
-ls || echo something			# or
-ls && echo something			# and
-ls; echo something && echo something	# command chain to &&
-ls || echo something; echo something	# && chain to command
-ls        -a  				# a lot of white spaces
-ls 			-a		# a lot of tabs
-\n					# returns
-ls ? -a					# random character
-l || ls					# fail or pass
-ls || l					# pass or error
-l && ls					# error & pass
-ls && l					# pass & error
-l;ls					# error ; pass
-ls;l					# pass ; error
-l;l					# error ; error
-l||l					# error or error
-l&&l					# error & error
+ls 
+ls -a  
+ls -l -a  
+ls -al    
+ls ; echo something 
+ls;echo something 
+echo something  
+echo someting
+echo ";&&||"
+echo "something"else""
+l    
+ls a    
+ls -0    
+/bin/ls 
+ls /path
+ls || echo something    
+ls && echo somethin 
+ls; echo something && echo something
+ls || echo something; echo something
+ls        -a    
+ls          -a    
+\n    
+ls ? -a  
+l || ls  
+ls || l 
+l && ls  
+ls && l 
+l;ls
+ls;l
+l;l 
+l||l
+l&&l
+ls -aaaaaaaaaaaaaaaaaaa -llllllllllllllllllllllllllllllllllllllllllllllllllll -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ls -a -a -a -a -a -a -a -a -a -a -a -a -a -a -a -a -a -l
+ls -aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+echo something else
+            ls -l           -a          -a                                  -h 
+echo something || ls -l && echo success && echo suceess2
+echo something ;;;;;;;;;;;;;; echo test || echo pass && ech0 || echo last line to print
+echo something | something & something && echo something else
+echo some || || || || echo 2 
+echo 1 && && && && && && && && && && && echo 2
+echo 1 &&&&&&&&&&&& echo2
+echo 1 ;;;||||&&&& echo 3
