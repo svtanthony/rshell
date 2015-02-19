@@ -165,12 +165,26 @@ void nukem()//deletes the char* and the char**
 queue<string> split(string s)//check the connectors to create substrings
 {
 	queue<string> list;
-	int len = s.size(), sPos(0);
+	int len = s.size(), sPos(0),next2(0);
 	for(int i(0); i < len; ++i)
 	{
-		char next = 0;
+		char next(0),next2(0),previous(0);
+
 		if(i+1 < len)
 			next = s[i+1];
+		else
+			next = '.';
+
+		if(i+2 < len)
+			next2 = s[i+2];
+		else
+			next2 = '.';
+
+		if(i > 0)
+			previous = s[i-1];
+		else
+			previous = '.';
+
 		switch(s[i])
 		{
 		case ';'://add the substring before the semicolon, then add a semilon to the queue
@@ -200,6 +214,13 @@ queue<string> split(string s)//check the connectors to create substrings
 					sPos = (i+2);
 					i++;
 				}
+				else
+				{
+					list.push(s.substr(sPos,i-sPos));
+					list.push("|");
+					sPos = (i+1);
+
+				}
 			}
 			break;
 		case '#':// set position of iterator to end if string to ignore comments
@@ -209,6 +230,29 @@ queue<string> split(string s)//check the connectors to create substrings
 				sPos = len;
 			}
 			break;
+		case '<': // extract the single or tripple input redirection operator
+			{
+				if(next == '<' && next2 == '<') // append "<"
+				{
+					list.push(s.substr(sPos,i-sPos));
+					list.push("<<<");
+					sPos = (i+3);
+					i+=2;
+				}
+				else // append "<"
+				{
+					list.push(s.substr(sPos,i-sPos));
+					list.push("<");
+					sPos = (i+1);
+				}
+			}
+		case '>'://check check fd range 0-255****************************************************************************************************
+			{
+				// if #>
+				// if #>$#
+				// if >>
+				// if >
+			}
 		default:;
 		}
 	}
