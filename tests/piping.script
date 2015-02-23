@@ -1,0 +1,137 @@
+Script started on Mon 23 Feb 2015 08:38:59 AM PST
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m make
+mkdir bin
+g++ src/rshell.cpp -o bin/rshell
+g++ -std=c++0x src/ls.cpp -o bin/ls
+g++ src/cp.cpp -o bin/cp
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m cd bin/
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell/bin $[00m ls
+[0m[01;32mcp[0m  [01;32mls[0m  [01;32mrshell[0m
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell/bin $[00m ./e[Krshell 
+error obtaining credentials: No such file or directory
+ $ ls
+cp  ls	rshell
+ $ echo sOmEthing >file1
+ $ cat file1
+sOmEthing
+ $ echo BeTTer >>file1
+ $ cat file1
+sOmEthing
+BeTTer
+ $ cat < file1
+error opening output file: No such file or directory
+^C
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell/bin $[00m ./rshell 
+error obtaining credentials: No such file or directory
+ $ cta    at <file1
+sOmEthing
+BeTTer
+ $ cat file1 | tr a-Z z A-Z | tee fileUpper | tr A-Z a-z fileLower         | file    tee fileLower>>file2
+ $ cat file1 file2       
+sOmEthing
+BeTTer
+ $ cat fileUpper
+SOMETHING
+BETTER
+ $ cat fileLower
+something
+better
+ $ cat file2
+something
+better
+ $ ls 
+cp  file1  file2  fileLower  fileUpper	ls  rshell
+ $ ls 2>  1>file3
+ $ cat file3
+cp
+file1
+file2
+file3
+fileLower
+fileUpper
+ls
+rshell
+ $ 
+ $ cat     ls
+cp  file1  file2  file3  fileLower  fileUpper  ls  rshell
+ $ ls > 2>fileerr   Error
+ $ t   cat fileError
+cp
+file1
+file2
+file3
+fileError
+fileLower
+fileUpper
+ls
+rshell
+ $ ls 2>&3^[[D^[[D^[[D^[[D                    -0
+ls: invalid option -- '0'
+Try 'ls --help' for more information.
+ $ ls -0 2>&3
+error opening output file: Bad address
+ls: invalid option -- '0'
+Try 'ls --help' for more information.
+ $ ls -0 2>filw 2 eError
+ls: invalid option -- '0'
+Try 'ls --help' for more information.
+ $ ls
+cp  file1  file2  file3  fileError  fileLower  fileUpper  ls  rshell
+ $ file    cat < fileError
+error opening output file: No such file or directory
+^C
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell/bin $[00m ./rshell 
+error obtaining credentials: No such file or directory
+ $ cat file    <fileError
+cp
+file1
+file2
+file3
+fileError
+fileLower
+fileUpper
+ls
+rshell
+ $ rm file1 file2 file3 fie leError fileLower fileUpper
+ $ ls
+cp  ls	rshell
+ $ ls | ls }   | ; ls | ls | ls | ls | ls | ls | ls | ls | ls |   ls | ls 
+ $ cp  ls	rshell
+ls    
+ $ ls | ;s 
+ $ s: No such file or directory
+ls  
+ $ l | ls
+l: No such file or directory
+ $ cp  ls	rshell
+ls
+cp  ls	rshell
+ $ cd  echo | tee   tr a-z A-z >file
+ $ ls
+cp  file  ls  rshell
+ $ cat fi	le
+
+ $ rm file
+ $ ls
+cp  ls	rshell
+ $ echo this is a test | tr -    tr a-z A-Z | grep test
+ $ ex cho this is a test | tr a-z A-Z | grep -i test
+ $ THIS IS A TEST
+e 
+ $ xargs echo <<< this is a test
+this is a test
+ $ xargs < this is a test
+error opening output file: No such file or directory
+
+
+
+^C
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell/bin $[00m ./rshell 
+error obtaining credentials: No such file or directory
+ $ this    echo <<< this is a test ^[[D^[[D^[[D^[[D^[[D^[[D^[[D^[[D^[[D^[[D^[[D^[[D^[[D^[[D^[[D^[[D                                                                                        xargs echo <<< thi sis a a a test                 s is a tst \  est 
+this is a test
+ $ ^C
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell/bin $[00m exit
+exit
+
+Script done on Mon 23 Feb 2015 08:53:18 AM PST
