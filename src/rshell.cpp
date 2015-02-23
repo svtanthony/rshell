@@ -92,7 +92,7 @@ string terminalPrefix()//function to get username and hostname
 
 int sysCalls()
 {
-	int pid, status;
+	int pid(0),status(0);
 	if ((pid=fork())== -1) // fork error
 	{
         perror("fork");
