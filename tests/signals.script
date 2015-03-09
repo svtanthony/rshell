@@ -1,0 +1,49 @@
+Script started on Mon 09 Mar 2015 08:15:14 AM PDT
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m mka[K[Kake
+mkdir bin
+g++ src/rshell.cpp -o bin/rshell
+g++ -std=c++0x src/ls.cpp -o bin/ls
+g++ src/cp.cpp -o bin/cp
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m s[Kbin
+bin/  bind  
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m bin/rshell 
+error obtaining credentials: No such file or directory
+[1;32m[3;31m ~/rshell $ [0mpwd
+/home/moon/rshell
+[1;32m[3;31m ~/rshell $ [0mcd  
+[1;32m[3;31m ~ $ [0mpwd
+/home/moon
+[1;32m[3;31m ~ $ [0mcd TE  rsh	      ^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~                                                  cd rshell
+[1;32m[3;31m ~/rshell $ [0mls
+a.out  LICENSE	 README.md  test       tester  typescript
+bin    Makefile  src	    testCases  tests
+[1;32m[3;31m ~/rshell $ [0mls
+a.out  LICENSE	 README.md  test       tester  typescript
+bin    Makefile  src	    testCases  tests
+[1;32m[3;31m ~/rshell $ [0mcd bad     fake  directory
+bad path: No such file or directory
+[1;32m[3;31m ~/rshell $ [0mecho test | cd
+cd: No such file or directory
+[1;32m[3;31m ~ $ [0m./a.out
+lines 24
+columns 80
+80
+[1;32m[3;31m ~ $ [0mcd rsh	ell
+[1;32m[3;31m ~/rshell $ [0mcd    ./a.out
+XXXXXXX^C[1;32m[3;31m ~/rshell $ [0m^C^C^C^C^C^C
+[1;32m[3;31m ~/rshell $ [0m^C
+[1;32m[3;31m ~/rshell $ [0m^C
+[1;32m[3;31m ~/rshell $ [0m^C
+[1;32m[3;31m ~/rshell $ [0m^C
+[1;32m[3;31m ~/rshell $ [0m^C
+[1;32m[3;31m ~/rshell $ [0m^C
+[1;32m[3;31m ~/rshell $ [0m./a.out 
+XXXXXXX^Z
+[1]+  Stopped                 bin/rshell
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m fg
+bin/rshell
+XXXXXXXXX^C[1;32m[3;31m ~/rshell $ [0me exit
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m exit
+exit
+
+Script done on Mon 09 Mar 2015 08:20:23 AM PDT
