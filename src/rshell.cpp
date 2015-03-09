@@ -1,278 +1,234 @@
-#include <cstdlib>
-#include <iostream>
+#include <algorithm>
+#include <cstdlib>	
+#include <cstring>
+#include <dirent.h>		//directory entry
+#include <errno.h>
+#include <fcntl.h>
+#include <iomanip>
+#include <iostream>	
+#include <grp.h>
+#include <pwd.h>
 #include <queue>
-#include <unistd.h>
+#include <sstream>
 #include <stdio.h>
-#include <string.h>
+#include <string>
+#include <sys/ioctl.h>	//terminal size
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <sys/stat.h>
-#include <sstream>
-#include <string>
+#include <unistd.h>
 #include <vector>
-#include <fcntl.h>
 
-int numArgs = 50;
-int numLen = 50;
-char** array;
 
 using namespace std;
 
-string terminalPrefix();
-void parse(string s, bool &run);
-int sysCalls();
-void init();
-int sysCallsLimited(int fd[], int fd2, int instruction, char *argv[]);
-void clear();
-void nukem();
-queue<string> split(string s);
-void itemCount(string s);
-
-void commands(vector<string> &token, bool &run);
-void doPipe(vector<string> &token, bool &run, int index);
-void doOr(vector<string> &token, bool &run, int index);
-void doAnd(vector<string> &token, bool &run, int index); 
-void doSemiColon(vector<string> &token, bool &run, int index);
-int redirectAndRun(vector<string> &token, bool &run, int index);
+void itemCount(string s,int &numArgs);
+void doPipe(vector<string> &token, bool &run);
+int doLeft3(vector<string> &token, bool &run, int index);
+void doRight(vector<string> &token, bool &run, int index);
+void doLeft1(vector<string> &token, bool &run, int index);
+int redirectAndRun(vector<string> &token, bool &run);
 int nextConnector(vector<string> &token);
+void runCommands(vector<string> &v, bool &run);
+int executeCMD(int argc, char *array[]);
+string terminalPrefix();
+string terminalDir();
+vector<string> parse(string s);
+void bg(int argc, char *array[]);
+void fg(int argc, char *array[]);
+void changeDir(int argc, char *array[]);
+void exitTer(int argc, char *array[]);//*********************************************kill all processes, then exit
+void handler(int sig)
+{
+	switch(sig)
+	{
+		case SIGINT:
+		case SIGSTOP:
+		default:
+			break;
+	}
+}
 
 int main()
 {
-   	string s,signature = terminalPrefix();// obtain username and hostname
+	string s,signature = terminalPrefix(),workingDir = terminalDir();// obtain username and hostname
 	bool run = 1;
-	
+
+	if(signal(SIGINT,handler) != 0 )
+		perror("error replacing signal handler");
+
 	while(run && cin)
 	{
+		workingDir = terminalDir();
 		cout.flush();
-		cout << signature << " $ ";
+		cout <<"\033[1;32m" << signature <<"\033[3;31m" <<  workingDir << " $ " << "\033[0m";
 		getline(cin, s);
-		//parse(s,run);
-		queue<string> list = split(s);
+		vector<string> commands = parse(s);
 		
-		vector<string> token;
-		while(!list.empty())
-		{
-			token.push_back(list.front());
-			list.pop();
-		}
+		runCommands(commands,run);
 		
-		int childPID = fork();
-		if(childPID == -1) {
-			perror("fork error");
-			run = false;
-		}
-		if(childPID != 0) {
-			int status = 0;
-			waitpid(childPID, &status, 0);
-		} else {
-			run = 0;
-			commands(token, run);
-			exit(0);
-		}
 	}
 	return 0;
 }
 
-string terminalPrefix()//function to get username and hostname
+void runCommands(vector<string> &v,bool &run)
 {
-	string signature;
-	char *lgn,host[50];
-
-	//get terminal variables and use them if possible	
-	if((lgn = getlogin()) == NULL || gethostname(host,50) != 0)
+	int status(0);
+	while(!v.empty())
 	{
-		perror("error obtaining credentials");
-		signature = "";
-	}
-	else
-		signature.append(lgn).append("@").append(host);
-
-	return signature;
-}
-
-int sysCalls()
-{
-	int pid(0),status(0);
-	if ((pid=fork())== -1) // fork error
-	{
-        perror("fork");
-		nukem();
-		exit(1);
-	}
-	else if (pid == 0) //child - run process and error check
-	{
-		if (execvp(array[0],array) != 0)
-		{
-			perror(array[0]);
-			exit(1);
+		//check connector vs command
+		if(v.size() > 2){
+			if(!v[1].compare("|"))
+				doPipe(v,run);
 		}
-	}else //parent - wait for child before proceeding
-		if( waitpid(pid, &status, 0) == -1)
+		else if (!v[0].compare("||"))
 		{
-			perror("Waiting Error");
-			exit(1);
+			v.erase(v.begin());
+			if(status == 0)
+				v.erase(v.begin());
+			continue;
 		}
-	return status;
-}
-
-int sysCallsLimited(int fd[], int fd2[], int instruction, char *argv[])/////////////////////////////////////////////////////
-{
-	//instruction 0 = close(1), dup(fd[0])
-	//instruction 1 = close(0), dup(fd[1]), close(1), dup(fd2[0])
-	//instruction 2 = close(0), dup(fd2[1])
-
-	if(instruction == 1)
-	{
-		close(0);
-		dup(fd[1]);//close fd[1]?
-		close(1);
-		dup(fd2[0]);//close fd2[0]?
-	}
-	else if(instruction == 0)
-	{
-		close(1);
-		dup(fd[0]);
-	}
-	else 
-		if(instruction == 2)
-		{
-			close(0);
-			dup(fd2[1]);
+		else if (!v[0].compare("&&")){
+			v.erase(v.begin());
+			if(status != 0)
+				v.erase(v.begin());
+			continue;
+		}
+		else if(!v[0].compare(";")){
+			v.erase(v.begin());
+			continue;
 		}
 
-	int pid;
-	if ((pid=fork())== -1) // fork error
-	{
-        perror("fork");
-		nukem();
-		exit(1);
-	}
-	else if (pid == 0) //child - run process and error check
-	{
-		if (execvp(argv[0],argv) != 0)
+		string str(v[0]);
+		if(str.find("exit") != string::npos || str.find("cd") != string::npos )
 		{
-			perror(argv[0]);
-			exit(1);
-		}
-	}else //parent
-		return pid;
-}
-
-void redirect(vector<string> &vExtracted)
-{
-	int redirections = 0;
-	for(int i(0); 1 < vExtracted.size(); i++)
-		if(vExtracted[i].compare("|") == 0 || vExtracted[i].find(">") != string::npos || vExtracted[i].find("<") != string::npos)
-			redirections++;
-	//**********************************************************************************************************	
-}
-
-void commands(vector<string> &token, bool &run)
-{
-/*	if(token.size())//check if omit next command based on connector and exit status
-	{
-		if(token[0].compare("&&") || token[0].compare("||") || token[0].compare(";"))
-		{
-			wait(0);
-			if((status == 0 && token[0].compare("||") == 0) || (status != 0 && token[0].compare("&&") == 0))
-			{
-				token.erase(token.begin());//erase connector
+			int i(0),numArgs;
+			itemCount(v[0],numArgs);
+			char *array[numArgs+1];
+			for(int k = 0; k < numArgs; ++k){
+				array[k] = new char[256];
+				memset(array[k],0,256);
 			}
+			array[numArgs] = 0;
+
+			string test;
+			stringstream ss;
+			ss << v[0];
+			v.erase(v.begin());
+			while(ss >> test)// fill argv
+			{
+				strcpy(array[i],test.c_str());
+				i++;
+			}
+			if(!strcmp(array[0], "exit"))
+				exitTer(numArgs,array);
 			else
-				if(token.size())
-					token.erase(token.begin()); // erase connect or erase next command if previous if went off
-		}
-	}
-	else
-		return; // empty list
-*/
-	if(token.size())
-	{
-		//find next connector!
-		int i = nextConnector(token);
-		if( i < token.size() ){
-			if( !token[i].compare("|") )
-				doPipe(token, run,i);
-			else if( !token[i].compare("||") )
-				doOr(token, run,i);
-			else if( !token[i].compare("&&") )
-				doAnd(token,run,i);
-			else if( !token[i].compare(";") )
-				doSemiColon(token, run, i);
-			else redirectAndRun(token,run,i);
-		}else
-			redirectAndRun(token,run,i);
+				changeDir(numArgs,array);
+			continue;
+		}	
 		
+		redirectAndRun(v,run);
+		
+					
 	}
 }
 
-void doPipe(vector<string> &token, bool &run, int index)
+int nextConnector(vector<string> &token)
 {
-	int fd[2];
-	pipe(fd);
+	int i = 0;
+	for(;(unsigned int)i<token.size();++i)
+		if( !token[i].compare("|") || !token[i].compare("&&") || !token[i].compare("||") || !token[i].compare(";"))
+			return i;
+	return i;
+}
 
+int redirectAndRun(vector<string> &token, bool &run)
+{
+	int index = nextConnector(token);
+	//do redirection!
+	doLeft1(token,run,index);
+	int l3 = doLeft3(token,run,index);
+	//doRight(token,run,index);
+	//...
+
+	int fd[2] = {0,0};
+	if(l3 < index)
+	{
+		pipe(fd);
+	}
+	//do execute command!
 	int childPID = fork();
 	if(childPID == -1)
 	{
 		perror("fork error");
 		run = false;
 	}
-	if(childPID != 0) //parent process
+	if(childPID != 0)
 	{
-		dup2(fd[1],1);
-		close(fd[0]);
-		close(fd[1]);
-		redirectAndRun(token,run,index);
-		int status;
-		//waitpid(childPID,&status,0);
-	} else //child process
+        if(l3 < index){
+			int childID = fork();
+			if(childID == -1) {perror("fork");}
+			if(childID == 0){
+				close(fd[0]);
+				int outSize = 0;
+    	   	 	if((outSize = write(fd[1],token[l3+1].c_str(),token[l3+1].size())) == -1)
+        		{
+					perror("write error");
+					run = false;
+					return -1;
+				}
+				close(fd[1]);
+				exit(0);
+			}
+			if(childID != 0){
+				close(fd[1]);
+				close(fd[0]);
+				cout << "erasing" << endl;
+				token.erase(token.begin()+l3+1);//erase string
+				token.erase(token.begin()+l3); // erase connector
+			}
+		}
+		token.erase(token.begin());//erase child process
+		int status = 0;
+		waitpid(childPID,&status,0);
+		return status;
+	} else // child
 	{
-		dup2(fd[0],0);
-		close(fd[0]);
-		close(fd[1]);
-		for(int i = 0; i <= index; ++i)
-			token.erase(token.begin());
-		commands(token,run);
+		if(l3 < index) {
+			dup2(fd[0],0);
+			close(fd[0]);
+			close(fd[1]);
+		}
+		
+		int i(0),numArgs;
+		itemCount(token[0],numArgs);
+		char *array[numArgs+1];
+		for(int k = 0; k < numArgs; ++k){
+			array[k] = new char[256];
+			memset(array[k],0,256);
+		}
+		array[numArgs] = 0;		
+		string test;
+		stringstream ss;
+		ss << token[0];
+		while(ss >> test)// fill argv
+		{
+			strcpy(array[i],test.c_str());
+			i++;
+		}
+		if (executeCMD(numArgs,array) != 0){
+			for(int k = 0; k < numArgs+1; ++k)
+				delete[] array[k];
+			exit(1);
+		}
 	}
-}
-
-void doOr(vector<string> & token, bool &run, int index)
-{
-	int status = redirectAndRun(token,run,index);
-
-	if(status == 0)
-		return;	
-	
-	for(int i = 0; i <= index; ++i)
-		token.erase(token.begin());
-	commands(token,run);
-}
-
-void doAnd(vector<string> &token, bool &run, int index)
-{
-	int status = redirectAndRun(token,run,index);
-
-	if(status != 0)
-		return;	
-	
-	for(int i = 0; i <= index; ++i)
-		token.erase(token.begin());
-	commands(token,run);
-}
-
-void doSemiColon(vector<string> &token, bool &run, int index)
-{
-	int status = redirectAndRun(token,run,index);
-
-	for(int i = 0; i <= index; ++i)
-		token.erase(token.begin());
-	commands(token,run);
+	return 1;
 }
 
 void doLeft1(vector<string> &token, bool &run, int index)
 {
 	int i = 0,fileIn;
-	for(;i < token.size(); ++i)
+	for(;(unsigned int)i < token.size(); ++i)
 		if(token[i].find("<") != string::npos)
 			break;
 
@@ -285,6 +241,8 @@ void doLeft1(vector<string> &token, bool &run, int index)
        			run = false;
        			return;
     		}
+		token.erase(token.begin()+i+1);
+		token.erase(token.begin()+i);
 
 		dup2(fileIn,0);
 	}
@@ -292,9 +250,9 @@ void doLeft1(vector<string> &token, bool &run, int index)
 
 void doRight(vector<string> &token, bool &run, int index)
 {
-	int i = 0,in = 1, out = 0,fileOut;
+	int i = 0, in = 1, out = 0,fileOut;
 	bool boolFD = true;
-	for(;i < token.size(); ++i)
+	for(;(unsigned int)i < token.size(); ++i)
 		if(token[i].find(">") != string::npos)
 			break;
 	if(i < index)
@@ -315,220 +273,194 @@ void doRight(vector<string> &token, bool &run, int index)
 		{
 			if(token[i].find(">>") != string::npos)
 			{
-					if(-1 == (fileOut = open(token[i+1].c_str(), O_WRONLY | O_APPEND |  O_CREAT, 0644)))
-    				{
-        				perror("error opening output file");
-                		run = false;
-                		return;
-    				}
+				if(-1 == (fileOut = open(token[i+1].c_str(), O_WRONLY | O_APPEND |  O_CREAT, 0644)))
+   				{
+       				perror("error opening output file");
+               		run = false;
+               		return;
+    			}
+				token.erase(token.begin()+i+1);
 			}else{
 				if(-1 == (fileOut = open(token[i+1].c_str(), O_WRONLY |  O_CREAT, 0644)))
-    				{
-        				perror("error opening output file");
-						run = false;
-        	        	return;
-    				}
+    			{
+        			perror("error opening output file");
+					run = false;
+        	       	return;
+    			}
+				token.erase(token.begin()+i+1);
 			}
-			dup2(fileOut,in);
+				dup2(fileOut,in);
+			}
 		}else{
-			dup2(in,out);
+			dup2(in,out);//stream out to be replaced by stream in
 		}
-			
-	}
+		token.erase(token.begin()+i);		
+		redirectAndRun(token,run);
+	
+		token.erase(token.begin());
+		token.erase(token.begin());
+
 }
 
 int doLeft3(vector<string> &token, bool &run, int index)
 {
-	int i = 0;
+	unsigned int i = 0;
 	for(;i < token.size(); ++i)
 		if(!token[i].compare("<<<"))
 			return i;
 	return i;
 }
 
-int redirectAndRun(vector<string> &token, bool &run, int index)
+void doPipe(vector<string> &token, bool &run)// create fork for first command, then create a second fork for second command, modify fd as needed
 {
-	//do redirection!
-	doLeft1(token,run,index);
-	int l3 = doLeft3(token,run,index);
-	doRight(token,run,index);
-	//...
+	int fd[2];
+	pipe(fd);
 
-	int fd[2] = {0,0};
-	if(l3 < index)
-	{
-		pipe(fd);
-	}
-	//do execute command!
-	int childPID = fork();
+	int childPID = fork(),childPID2;
 	if(childPID == -1)
 	{
 		perror("fork error");
 		run = false;
 	}
-	if(childPID != 0)
+	if(childPID != 0) //parent process
 	{
-        if(l3 < index){
-			close(fd[0]);
-			int outSize = 0;
-    	    if((outSize = write(fd[1],token[l3+1].c_str(),token[l3+1].size())) == -1)
-        	{
-				perror("write error");
-				run = false;
-				return -1;
-			}
-			close(fd[1]);
+		token.erase(token.begin());//clear current command
+		token.erase(token.begin());//clear connector
+
+		// *******  second command execution fork # 2 *************************************************
+		childPID2 = fork();
+		if(childPID2 == -1) {
+			perror("fork error");
+			run = 0;
 		}
-		int status = 0;
-		waitpid(childPID,&status,0);
-		return status;
-	} else
-	{
-		if(l3 < index) {
+		if(childPID2 == 0){
 			dup2(fd[0],0);
 			close(fd[0]);
 			close(fd[1]);
-		}
-		
-		int i(0);
-		itemCount(token[0]);
-		char *array[numArgs+1];
-		for(int k = 0; k < numArgs; ++k){
-			array[k] = new char[256];
-			memset(array[k],0,256);
-		}
-		array[numArgs] = 0;		
-
-		string test;
-		stringstream ss;
-		ss << token[0];
-		while(ss >> test)// fill argv
-		{
-			strcpy(array[i],test.c_str());
-			i++;
+			if(token.size() > 2)
+				if(!(token[1].compare("|"))){//another pipe
+					doPipe(token, run);
+					exit(0);
+				}
+			redirectAndRun(token,run);
+			exit(0);
 		}
 
-		if (execvp(array[0],array) != 0){
-			perror(array[0]);
-			for(int k = 0; k < numArgs+1; ++k)
-				delete[] array[k];
-			exit(1);
-		}
+		// *********  fork # 2 end  ***********************************************************************
+		close(fd[0]);
+		close(fd[1]);
+		int status,status2;
+		waitpid(childPID,&status,0);
+		waitpid(childPID2,&status2,0); 
+		//return status2;
+	} else //child process
+	{
+		dup2(fd[1],1);//change read in
+		close(fd[0]);
+		close(fd[1]);
+		redirectAndRun(token,run);
+		exit(0);
 	}
 }
 
-void parse(string s, bool &run)
+int executeCMD(int argc, char *array[])//only child process should be here
 {
-	queue<string> list;
-
-	list = split(s);//fuction creates substrings of commands and separators
-
-	vector<string> vList;
-	while(!list.empty())
-	{
-		vList.push_back(list.front());
-		list.pop();
+/*	if(signal(SIGINT, SIG_DFL) != 0){
+		perror("error restoting default signal");
+		exit(1);
 	}
-
-	int status(0);
-	while(!vList.empty())
-	{
-		stringstream ss,ss2;
-		string test;
-		ss << vList[0];
-		ss2 << vList[0];
-		
-		itemCount(vList[0]);
-		
-		test = vList[0];
-		vList.erase(vList.begin());
-		string next;
-
-		if(!vList.empty())
-			next = vList[0];
-
-
-		if(next.compare("|") == 0 || next.find(">") != string::npos || next.find("<") != string::npos)	
-			cout << "FOUND CHAIN\n"; //function to extract chain of redirectinons
-		
-		//process chain
-
-
-/*
-		// check if we have commands or connectors and depending on the connector check the previous exit status
-		if(test == ";")
-			continue;//continue means run the command
-		else if( test.compare("||") == 0)
+*/
+	const char *path;
+	if((path = getenv("PATH")) == NULL){
+		perror("error obtaining PATH");
+		exit(1);
+	}
+	else{
+		if(argc)//avoid dereference @ array[0]
 		{
-			if(status == 0) // previous command succeeded (TRUE || command)
+			int status;
+			string s(path), str;
+			stringstream ss;
+			size_t found = s.find(":");
+			while(found != string::npos)
 			{
-				vList.erase(0);
-				continue;
+				s.replace(found,1," ");
+				found = s.find(":");
 			}
-			else
-				continue; // previous command failed (FALSE || command)
-		}
-		else if(test.compare("&&") == 0)
-		{
-			if(status != 0)// previous command failed (FALSE && command)
-			{
-				vList.erase(0);
-				continue;
-			}
-			else
-				continue;// previous command succeeded (TRUE && command)
-		}
-		else //map of signals and commands
-		{
-			ss2 >> test;	
-			if(test.compare("exit") == 0){
-				run = 0;
-				break;	
-			}
-		}
-
-		init();
-		int i(0);
-		
-		while(ss >> test)// fill the char** normally referred to as args to pass to execvp
-		{
-			strcpy(array[i],test.c_str());
-			i++;
-		}
-		
-		status = sysCalls();
-		nukem();
-*/	}
-}
-
-void init()// initializes char*[] or char ** array
-{
-	array = new char*[numArgs+1];
+			
+			if(argc > 0)
+				status = execv(array[0],array);
 	
-	for(int i(0); i < numArgs ; i++)
-		array[i] = new char[numLen];
-	array[numArgs] = 0;
-	clear();
+			ss << s;
+			while(ss >> str)
+			{
+				str.append("/");
+				str.append(array[0]);
+				status = execv(str.c_str(),array);
+			}
+
+			if(status == -1){
+				perror(array[0]);
+			//	exit(1);
+			}
+		}
+	}
+	return 1;
 }
 
-void clear()// clears the char*
+void changeDir(int argc, char *array[])
 {
-	for(int i(0); i < numArgs ; i++)
-		for(int j(0); j < numLen; j++)
-			array[i][j] = '\0';
+	if( argc > 1){
+		if(chdir(array[1]) == -1){
+			perror("bad path");
+		}
+	}
+	else
+	{
+		const char *homedir;
+		if ((homedir = getenv("HOME")) == NULL) {
+			homedir = getpwuid(getuid())->pw_dir;
+		}
+		if(homedir == NULL)
+			perror("error obtaining HOME var");
+		else
+			chdir(homedir);
+	}
 }
 
-void nukem()//deletes the char* and the char**
+void exitTer(int argc, char *array[])//*********************************************kill all processes, then exit
 {
-	for(int i(numArgs-1); i >= 0 ;i--)
-		delete[] array[i];
-	delete[] array;
+	while (1) {
+    	int status;
+    	pid_t done = wait(&status);
+    	if (done == -1) {
+        	if (errno == ECHILD) break; // no more child processes
+    	} else {
+        	if (!WIFEXITED(status) || WEXITSTATUS(status) != 0) {
+            	perror("wait error");
+           	 exit(1);
+        	}
+    	}
+	}
+
+	//kill all processes
+	exit(0);
 }
 
-queue<string> split(string s)//check the connectors to create substrings
+void fg(int argc, char *array[])
 {
-	queue<string> list;
-	int len = s.size(), sPos(0),next2(0);
+	;//^z
+}
+
+void bg(int argc, char *array[])
+{
+	;//^z
+}
+
+vector<string> parse(string s)
+{
+	vector<string> list;
+	int len = s.size(), sPos(0) ;
 	for(int i(0); i < len; ++i)
 	{
 		char next(0),next2(0),previous(0);
@@ -552,8 +484,8 @@ queue<string> split(string s)//check the connectors to create substrings
 		{
 		case ';'://add the substring before the semicolon, then add a semilon to the queue
 			{
-				list.push(s.substr(sPos,i-sPos));
-				list.push(";");
+				list.push_back(s.substr(sPos,i-sPos));
+				list.push_back(";");
 				sPos = (i+1);
 			}
 			break;
@@ -562,8 +494,8 @@ queue<string> split(string s)//check the connectors to create substrings
 				if(next == '&')
 				{
 					if(i-sPos)
-						list.push(s.substr(sPos,i-sPos));
-					list.push("&&");
+						list.push_back(s.substr(sPos,i-sPos));
+					list.push_back("&&");
 					sPos = (i+2);
 					i++;
 				}
@@ -574,16 +506,16 @@ queue<string> split(string s)//check the connectors to create substrings
 				if(next == '|')
 				{
 					if(i-sPos)
-						list.push(s.substr(sPos,i-sPos));
-					list.push("||");
+						list.push_back(s.substr(sPos,i-sPos));
+					list.push_back("||");
 					sPos = (i+2);
 					i++;
 				}
 				else
 				{
 					if(i-sPos)
-						list.push(s.substr(sPos,i-sPos));
-					list.push("|");
+						list.push_back(s.substr(sPos,i-sPos));
+					list.push_back("|");
 					sPos = (i+1);
 
 				}
@@ -591,7 +523,7 @@ queue<string> split(string s)//check the connectors to create substrings
 			break;
 		case '#':// set position of iterator to end if string to ignore comments
 			{
-				list.push(s.substr(sPos, i-sPos));
+				list.push_back(s.substr(sPos, i-sPos));
 				i = len;
 				sPos = len;
 			}
@@ -601,16 +533,16 @@ queue<string> split(string s)//check the connectors to create substrings
 				if(next == '<' && next2 == '<') // append "<"
 				{
 					if(i-sPos)
-						list.push(s.substr(sPos,i-sPos));
-					list.push("<<<");
+						list.push_back(s.substr(sPos,i-sPos));
+					list.push_back("<<<");
 					sPos = (i+3);
 					i+=2;
 				}
 				else // append "<"
 				{
 					if(i-sPos)
-						list.push(s.substr(sPos,i-sPos));
-					list.push("<");
+						list.push_back(s.substr(sPos,i-sPos));
+					list.push_back("<");
 					sPos = (i+1);
 				}
 			}
@@ -622,24 +554,24 @@ queue<string> split(string s)//check the connectors to create substrings
 					if(next == '&' && isdigit(next2)) // #>&#
 					{
 						if((i-1)-sPos)
-							list.push(s.substr(sPos,(i-1)-sPos));
-						list.push(s.substr(i-1,4));
+							list.push_back(s.substr(sPos,(i-1)-sPos));
+						list.push_back(s.substr(i-1,4));
 						sPos = (i+3);
 						i+=2;
 					}
 					else if(next == '>')// #>>
 					{
 						if((i-1)-sPos)
-							list.push(s.substr(sPos,(i-1)-sPos));
-						list.push(s.substr(i-1,3));
+							list.push_back(s.substr(sPos,(i-1)-sPos));
+						list.push_back(s.substr(i-1,3));
 						sPos = (i+2);
 						i++;
 					}
 					else // #>
 					{
 						if((i-1)-sPos)
-							list.push(s.substr(sPos,(i-1)-sPos));
-						list.push(s.substr((i-1),2));
+							list.push_back(s.substr(sPos,(i-1)-sPos));
+						list.push_back(s.substr((i-1),2));
 						sPos = (i+1);
 					}
 					break;
@@ -647,8 +579,8 @@ queue<string> split(string s)//check the connectors to create substrings
 				else if(next == '>') // >>
 				{
 					if(i-sPos)
-						list.push(s.substr(sPos,i-sPos));
-					list.push(">>");
+						list.push_back(s.substr(sPos,i-sPos));
+					list.push_back(">>");
 					sPos = (i+2);
 					i++;
 					break;
@@ -656,8 +588,8 @@ queue<string> split(string s)//check the connectors to create substrings
 				else // >
 				{
 					if(i-sPos)
-						list.push(s.substr(sPos,i-sPos));
-					list.push(">");
+						list.push_back(s.substr(sPos,i-sPos));
+					list.push_back(">");
 					sPos = (i+1);
 				}
 			}
@@ -665,18 +597,70 @@ queue<string> split(string s)//check the connectors to create substrings
 		}
 	}
 	if (sPos != len)
-		list.push(s.substr(sPos));//add the rest of the string to the queue
-	
+		list.push_back(s.substr(sPos));//add the rest of the string to the queue
+
+	for(unsigned int i(0) ; i < list.size() ; ++i)
+		while(!list[i].empty() && list[i][0] == ' ')
+			list[i].erase(0,1);
+				
 	return list;
 }
 
-void itemCount(string s)//set glocal variables for array creation
+string terminalPrefix()//function to get username and hostname
+{
+	string signature;
+	char *lgn,host[50];
+
+	//get terminal variables and use them if possible	
+	if((lgn = getlogin()) == NULL || gethostname(host,50) != 0)
+	{
+		perror("error obtaining credentials");
+		signature = "";
+	}
+	else
+		signature.append(lgn).append("@").append(host);
+
+	return signature;
+}
+
+string terminalDir()
+{
+	char buf[PATH_MAX];
+	const char *homedir;
+	if(!getcwd(buf,PATH_MAX))
+	{
+		perror("can't read current working directory");
+		return "";
+	}
+
+	//convert homePath to ~/
+	if ((homedir = getenv("HOME")) == NULL) {
+    	homedir = getpwuid(getuid())->pw_dir;
+		if(homedir == NULL){
+			perror("error obtataining HOME var");
+			perror("error obtaining UID");
+		}
+	}
+	
+	string s(buf),t(homedir);
+
+	if(!t.empty())
+	{
+		size_t found = s.find(t);
+		if(found != string::npos)
+			s.replace(0,t.size()," ~");
+	}
+
+	return s;
+}
+
+void itemCount(string s, int &numArgs)//set glocal variables for array creation
 {
 	stringstream ss;
 	ss << s;
 	queue<string > worker;
 	string str;
-	int size = 0;
+	unsigned int size = 0;
 	while(ss >> str)
 	{
 		worker.push(str);
@@ -684,14 +668,4 @@ void itemCount(string s)//set glocal variables for array creation
 			size = str.size();
 	}
 	numArgs = worker.size();
-	numLen = size;
-}
-
-int nextConnector(vector<string> &token)
-{
-	int i = 0;
-	for(;i<token.size();++i)
-		if( !token[i].compare("|") || !token[i].compare("&&") || !token[i].compare("||") || !token[i].compare(";"))
-			return i;
-	return i;
 }
