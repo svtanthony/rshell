@@ -1,49 +1,70 @@
-Script started on Mon 09 Mar 2015 08:15:14 AM PDT
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m mka[K[Kake
-mkdir bin
-g++ src/rshell.cpp -o bin/rshell
-g++ -std=c++0x src/ls.cpp -o bin/ls
-g++ src/cp.cpp -o bin/cp
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m s[Kbin
-bin/  bind  
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m bin/rshell 
+Script started on Mon 09 Mar 2015 08:30:07 AM PDT
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m ls
+[0m[01;32ma.out[0m  [01;34mbin[0m  LICENSE  Makefile  README.md  [01;34msrc[0m  test  testCases  [01;32mtester[0m  [01;34mtests[0m  typescript
+[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m bin/rhs[K[Kshell 
 error obtaining credentials: No such file or directory
-[1;32m[3;31m ~/rshell $ [0mpwd
+[1;32m[3;31m ~/rshell $ [0mecho commands are run through execv instead of exec  vp
+commands are run through execv instead of execvp
+[1;32m[3;31m ~/rshell $ [0mcd    pwd
 /home/moon/rshell
-[1;32m[3;31m ~/rshell $ [0mcd  
+[1;32m[3;31m ~/rshell $ [0mcd
 [1;32m[3;31m ~ $ [0mpwd
 /home/moon
-[1;32m[3;31m ~ $ [0mcd TE  rsh	      ^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~                                                  cd rshell
-[1;32m[3;31m ~/rshell $ [0mls
-a.out  LICENSE	 README.md  test       tester  typescript
-bin    Makefile  src	    testCases  tests
-[1;32m[3;31m ~/rshell $ [0mls
-a.out  LICENSE	 README.md  test       tester  typescript
-bin    Makefile  src	    testCases  tests
-[1;32m[3;31m ~/rshell $ [0mcd bad     fake  directory
+[1;32m[3;31m ~ $ [0mls  cd rsh	      ^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~                                                  
+[1;32m[3;31m ~ $ [0m
+[1;32m[3;31m ~ $ [0m
+[1;32m[3;31m ~ $ [0m
+[1;32m[3;31m ~ $ [0mcd rsh	      ^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~^[[3~                                                                           cd eshe    rshell
+[1;32m[3;31m ~/rshell $ [0mls  cd fakedir
 bad path: No such file or directory
-[1;32m[3;31m ~/rshell $ [0mecho test | cd
+[1;32m[3;31m ~/rshell $ [0mecho .. | cd
 cd: No such file or directory
-[1;32m[3;31m ~ $ [0m./a.out
-lines 24
-columns 80
-80
-[1;32m[3;31m ~ $ [0mcd rsh	ell
-[1;32m[3;31m ~/rshell $ [0mcd    ./a.out
-XXXXXXX^C[1;32m[3;31m ~/rshell $ [0m^C^C^C^C^C^C
+[1;32m[3;31m ~ $ [0mcd  cd  cdbadpath
+[1;32m[3;31m ~ $ [0m
+[1;32m[3;31m ~ $ [0ml
+l: No such file or directory
+[1;32m[3;31m ~ $ [0mcd rshell
+[1;32m[3;31m ~/rshell $ [0m./a.out
+XXXXX^C[1;32m[3;31m ~/rshell $ [0m^C^C^C
+[1;32m[3;31m ~/rshell $ [0m
+[1;32m[3;31m ~/rshell $ [0mcat ..TEs   /TESTNG  ING/nonStop.cpp
+#include <iostream>
+#include <stdlib.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main()
+{
+	while(1)
+	{
+		cout << "X" ;
+		cout.flush();
+		sleep(1);
+	}
+	return 0;
+}
+[1;32m[3;31m ~/rshell $ [0m^C^C^C^C
+[1;32m[3;31m ~/rshell $ [0m
+[1;32m[3;31m ~/rshell $ [0m
+[1;32m[3;31m ~/rshell $ [0m
 [1;32m[3;31m ~/rshell $ [0m^C
 [1;32m[3;31m ~/rshell $ [0m^C
-[1;32m[3;31m ~/rshell $ [0m^C
-[1;32m[3;31m ~/rshell $ [0m^C
-[1;32m[3;31m ~/rshell $ [0m^C
-[1;32m[3;31m ~/rshell $ [0m^C
-[1;32m[3;31m ~/rshell $ [0m./a.out 
-XXXXXXX^Z
-[1]+  Stopped                 bin/rshell
-[01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m fg
-bin/rshell
-XXXXXXXXX^C[1;32m[3;31m ~/rshell $ [0me exit
+[1;32m[3;31m ~/rshell $ [0mcat
+this 
+this 
+is 
+is 
+a
+a
+test
+test
+^C[1;32m[3;31m ~/rshell $ [0m
+[1;32m[3;31m ~/rshell $ [0m
+[1;32m[3;31m ~/rshell $ [0mls
+a.out  bin  LICENSE  Makefile  README.md  src  test  testCases	tester	tests  typescript
+[1;32m[3;31m ~/rshell $ [0mexit
 [01;32mmoon@Tsukuyomi[01;34m ~/rshell $[00m exit
 exit
 
-Script done on Mon 09 Mar 2015 08:20:23 AM PDT
+Script done on Mon 09 Mar 2015 08:34:18 AM PDT
